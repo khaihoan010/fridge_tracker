@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/khaih/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_barcode_scanner-2.0.0/android/**)",
+      "Bash(./gradlew:*)",
+      "Bash(where java)",
+      "Bash(java:*)",
+      "Bash(flutter pub:*)",
+      "Bash(flutter run:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
