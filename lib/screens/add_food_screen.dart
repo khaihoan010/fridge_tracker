@@ -439,17 +439,31 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
             // Barcode
             Container(
               decoration: BoxDecoration(
-                color: AppColorsV2.snowWhite,
-                borderRadius: BorderRadius.circular(AppSpacingV2.radiusL),
-                boxShadow: AppShadowsV2.neuEmbossed,
+                gradient: LinearGradient(
+                  colors: [
+                    AppColorsV2.snowWhite,
+                    AppColorsV2.pearlGray.withOpacity(0.3),
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: AppSpacingV2.borderM,
+                boxShadow: AppShadowsV2.soft,
+                border: Border.all(
+                  color: AppColorsV2.doveGray.withOpacity(0.3),
+                  width: 1,
+                ),
               ),
               child: ListTile(
-                leading: const Text('📱', style: TextStyle(fontSize: 24)),
                 title: Text(
-                  _barcode ?? 'Quét mã vạch',
-                  style: AppTypographyV2.bodyMedium,
+                  'Mã vạch',
+                  style: AppTypographyV2.labelMedium(color: AppColorsV2.charcoalSoft),
                 ),
-                trailing: const Icon(Icons.qr_code_scanner, color: AppColorsV2.primaryPink),
+                subtitle: Text(
+                  _barcode ?? 'Chưa quét',
+                  style: AppTypographyV2.bodyMedium(),
+                ),
+                trailing: Icon(Icons.qr_code_scanner_rounded, color: AppColorsV2.roseQuartz),
                 onTap: _scanBarcode,
               ),
             ),
@@ -459,25 +473,32 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
             // Notes
             Container(
               decoration: BoxDecoration(
-                color: AppColorsV2.snowWhite,
-                borderRadius: BorderRadius.circular(AppSpacingV2.radiusL),
-                boxShadow: AppShadowsV2.neuDebossed,
+                gradient: LinearGradient(
+                  colors: [
+                    AppColorsV2.snowWhite,
+                    AppColorsV2.pearlGray.withOpacity(0.3),
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: AppSpacingV2.borderM,
+                boxShadow: AppShadowsV2.soft,
+                border: Border.all(
+                  color: AppColorsV2.doveGray.withOpacity(0.3),
+                  width: 1,
+                ),
               ),
               child: TextFormField(
                 controller: _notesController,
-                style: AppTypographyV2.bodyMedium,
+                style: AppTypographyV2.bodyMedium(),
                 decoration: InputDecoration(
                   labelText: 'Ghi chú',
-                  labelStyle: AppTypographyV2.bodyMedium.copyWith(
-                    color: AppColorsV2.textLight,
-                  ),
-                  prefixIcon: const Padding(
-                    padding: EdgeInsets.only(top: 12),
-                    child: Text('📝', style: TextStyle(fontSize: 20)),
+                  labelStyle: AppTypographyV2.labelMedium(
+                    color: AppColorsV2.charcoalSoft,
                   ),
                   border: InputBorder.none,
-                  contentPadding: const EdgeInsets.symmetric(
-                    horizontal: AppSpacingV2.m,
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: AppSpacingV2.l,
                     vertical: AppSpacingV2.m,
                   ),
                 ),
@@ -499,13 +520,24 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
           width: 200,
           height: 200,
           decoration: BoxDecoration(
-            color: AppColorsV2.snowWhite,
-            borderRadius: BorderRadius.circular(AppSpacingV2.radiusL),
-            boxShadow: AppShadowsV2.neuEmbossed,
+            gradient: LinearGradient(
+              colors: [
+                AppColorsV2.snowWhite,
+                AppColorsV2.pearlGray.withOpacity(0.3),
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: AppSpacingV2.borderM,
+            boxShadow: AppShadowsV2.soft,
+            border: Border.all(
+              color: AppColorsV2.doveGray.withOpacity(0.3),
+              width: 1,
+            ),
           ),
           child: _imagePath != null && File(_imagePath!).existsSync()
               ? ClipRRect(
-                  borderRadius: BorderRadius.circular(AppSpacingV2.radiusL),
+                  borderRadius: AppSpacingV2.borderM,
                   child: Stack(
                     fit: StackFit.expand,
                     children: [
@@ -546,8 +578,8 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                     ),
                     const SizedBox(height: AppSpacingV2.s),
                     Text(
-                      'Thêm ảnh 📸',
-                      style: AppTypographyV2.bodyMedium.copyWith(
+                      'Thêm ảnh',
+                      style: AppTypographyV2.bodyMedium().copyWith(
                         color: AppColorsV2.textSecondary,
                         fontWeight: FontWeight.w600,
                       ),
@@ -598,7 +630,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                   ),
                   child: const Icon(Icons.camera_alt, color: Colors.white, size: 20),
                 ),
-                title: Text('Chụp ảnh 📷', style: AppTypographyV2.bodyMedium),
+                title: Text('Chụp ảnh', style: AppTypographyV2.bodyMedium()),
                 onTap: () async {
                   Navigator.pop(context);
                   final image = await ImageService.instance.pickImageFromCamera();
@@ -619,7 +651,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                   ),
                   child: const Icon(Icons.photo_library, color: Colors.white, size: 20),
                 ),
-                title: Text('Chọn từ thư viện 🖼️', style: AppTypographyV2.bodyMedium),
+                title: Text('Chọn từ thư viện', style: AppTypographyV2.bodyMedium()),
                 onTap: () async {
                   Navigator.pop(context);
                   final image = await ImageService.instance.pickImageFromGallery();
