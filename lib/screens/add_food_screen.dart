@@ -7,10 +7,12 @@ import 'package:http/http.dart' as http;
 import '../models/food_item.dart';
 import '../models/category.dart';
 import '../models/product_info.dart';
+import '../models/food_template.dart';
 import '../providers/food_provider.dart';
 import '../providers/settings_provider.dart';
 import '../services/barcode_service.dart';
 import '../services/image_service.dart';
+import '../services/food_database_service.dart';
 import '../utils/constants.dart';
 import '../utils/app_colors_v2.dart';
 import '../utils/app_typography_v2.dart';
@@ -42,6 +44,8 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
   String? _barcode;
 
   bool _isEditing = false;
+  FoodTemplate? _selectedFoodTemplate; // Track selected food template
+  bool _autoCalculatedExpiry = false; // Track if expiry was auto-calculated
 
   @override
   void initState() {
@@ -145,17 +149,78 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
             _buildImageSection(),
             AppSpacingV2.gapXl,
 
-            // Name - Using CuteInputFieldV2
-            CuteInputFieldV2(
-              controller: _nameController,
-              labelText: 'Tên thực phẩm',
-              hintText: 'VD: Cà chua bi',
-              icon: Icons.inventory_2_rounded,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Vui lòng nhập tên thực phẩm';
+            // Name - With Autocomplete
+            Autocomplete<FoodTemplate>(
+              optionsBuilder: (TextEditingValue textEditingValue) async {
+                if (textEditingValue.text.isEmpty || textEditingValue.text.length < 2) {
+                  return const Iterable<FoodTemplate>.empty();
                 }
-                return null;
+                try {
+                  return await FoodDatabaseService.instance.searchFood(textEditingValue.text);
+                } catch (e) {
+                  return const Iterable<FoodTemplate>.empty();
+                }
+              },
+              displayStringForOption: (FoodTemplate option) => option.name,
+              onSelected: (FoodTemplate selection) {
+                _onFoodTemplateSelected(selection);
+              },
+              fieldViewBuilder: (context, controller, focusNode, onEditingComplete) {
+                // Sync with _nameController
+                _nameController.text = controller.text;
+                return CuteInputFieldV2(
+                  controller: controller,
+                  focusNode: focusNode,
+                  labelText: 'Tên thực phẩm',
+                  hintText: 'VD: Cà chua bi',
+                  icon: Icons.search_rounded,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Vui lòng nhập tên thực phẩm';
+                    }
+                    return null;
+                  },
+                );
+              },
+              optionsViewBuilder: (context, onSelected, options) {
+                return Align(
+                  alignment: Alignment.topLeft,
+                  child: Material(
+                    elevation: 4,
+                    borderRadius: AppSpacingV2.borderM,
+                    child: Container(
+                      constraints: const BoxConstraints(maxHeight: 300),
+                      decoration: BoxDecoration(
+                        color: AppColorsV2.snowWhite,
+                        borderRadius: AppSpacingV2.borderM,
+                        boxShadow: AppShadowsV2.medium,
+                      ),
+                      child: ListView.builder(
+                        padding: EdgeInsets.zero,
+                        shrinkWrap: true,
+                        itemCount: options.length,
+                        itemBuilder: (context, index) {
+                          final option = options.elementAt(index);
+                          return ListTile(
+                            title: Text(
+                              option.name,
+                              style: AppTypographyV2.bodyMedium(),
+                            ),
+                            subtitle: Text(
+                              'Hạn dùng: ${option.getShelfLifeDescription(_selectedLocation)}',
+                              style: AppTypographyV2.bodySmall().copyWith(
+                                color: AppColorsV2.slateMuted,
+                              ),
+                            ),
+                            onTap: () {
+                              onSelected(option);
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                );
               },
             ),
             AppSpacingV2.gapL,
@@ -256,7 +321,19 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                   );
                 }).toList(),
                 onChanged: (value) {
-                  if (value != null) setState(() => _selectedLocation = value);
+                  if (value != null) {
+                    setState(() {
+                      _selectedLocation = value;
+                      // Re-calculate expiry date if food template is selected
+                      if (_selectedFoodTemplate != null) {
+                        _expiryDate = _selectedFoodTemplate!.calculateExpiryDate(
+                          storageLocation: value,
+                          purchaseDate: _purchaseDate,
+                        );
+                        _autoCalculatedExpiry = true;
+                      }
+                    });
+                  }
                 },
               ),
             ),
@@ -415,15 +492,36 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                 ),
               ),
               child: ListTile(
-                title: Text(
-                  'Hạn sử dụng',
-                  style: AppTypographyV2.labelMedium(
-                    color: AppColorsV2.charcoalSoft,
-                  ),
+                title: Row(
+                  children: [
+                    Text('Hạn sử dụng', style: AppTypographyV2.labelMedium(color: AppColorsV2.charcoalSoft)),
+                    if (_autoCalculatedExpiry) ...[
+                      const SizedBox(width: 8),
+                      Icon(
+                        Icons.auto_awesome_rounded,
+                        size: 16,
+                        color: AppColorsV2.goldenHour,
+                      ),
+                    ],
+                  ],
                 ),
-                subtitle: Text(
-                  DateFormat('dd/MM/yyyy').format(_expiryDate),
-                  style: AppTypographyV2.bodyMedium(),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      DateFormat('dd/MM/yyyy').format(_expiryDate),
+                      style: AppTypographyV2.bodyMedium(),
+                    ),
+                    if (_autoCalculatedExpiry && _selectedFoodTemplate != null) ...[
+                      const SizedBox(height: 4),
+                      Text(
+                        'Đề xuất: ${_selectedFoodTemplate!.getShelfLifeDescription(_selectedLocation)}',
+                        style: AppTypographyV2.bodySmall().copyWith(
+                          color: AppColorsV2.slateMuted,
+                        ),
+                      ),
+                    ],
+                  ],
                 ),
                 trailing: Icon(
                   Icons.calendar_today_rounded,
@@ -690,6 +788,47 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
         ),
       ),
     );
+  }
+
+  /// Handle food template selection from autocomplete
+  void _onFoodTemplateSelected(FoodTemplate foodTemplate) {
+    setState(() {
+      _selectedFoodTemplate = foodTemplate;
+      _nameController.text = foodTemplate.name;
+
+      // Auto-fill category
+      _selectedCategory = foodTemplate.category;
+
+      // Auto-calculate expiry date based on current storage location
+      _expiryDate = foodTemplate.calculateExpiryDate(
+        storageLocation: _selectedLocation,
+        purchaseDate: _purchaseDate,
+      );
+      _autoCalculatedExpiry = true;
+    });
+
+    // Show storage tips if available
+    if (foodTemplate.storageTips != null && foodTemplate.storageTips!.isNotEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Row(
+            children: [
+              Icon(Icons.lightbulb_outline_rounded, color: AppColorsV2.goldenHour),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  'Mẹo: ${foodTemplate.storageTips!}',
+                  style: const TextStyle(color: Colors.white),
+                ),
+              ),
+            ],
+          ),
+          backgroundColor: AppColorsV2.charcoalSoft,
+          duration: const Duration(seconds: 5),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+    }
   }
 
   Future<void> _selectDate(BuildContext context, bool isPurchaseDate) async {
