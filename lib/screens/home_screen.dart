@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/food_provider.dart';
 import '../providers/settings_provider.dart';
-import '../widgets/food_card.dart';
+import '../widgets/food_card_v2.dart';
 import '../widgets/category_filter.dart';
 import '../widgets/empty_state.dart';
-import '../widgets/cute/cute_search_bar.dart';
-import '../utils/app_colors.dart';
-import '../utils/app_typography.dart';
-import '../utils/app_spacing.dart';
-import '../utils/app_shadows.dart';
+import '../widgets/cute/cute_search_bar_v2.dart';
+import '../utils/app_colors_v2.dart';
+import '../utils/app_typography_v2.dart';
+import '../utils/app_spacing_v2.dart';
+import '../utils/app_shadows_v2.dart';
 import 'add_food_screen.dart';
 import 'food_detail_screen.dart';
 import 'settings_screen.dart';
@@ -67,56 +67,66 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundNeu,
+      backgroundColor: AppColorsV2.snowWhite,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(70),
         child: Container(
           decoration: BoxDecoration(
-            color: AppColors.backgroundNeu,
-            borderRadius: const BorderRadius.only(
-              bottomLeft: Radius.circular(AppSpacing.radiusL),
-              bottomRight: Radius.circular(AppSpacing.radiusL),
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                AppColorsV2.snowWhite,
+                AppColorsV2.pearlGray.withOpacity(0.3),
+              ],
             ),
-            boxShadow: AppShadows.neuEmbossed,
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(AppSpacingV2.radiusL),
+              bottomRight: Radius.circular(AppSpacingV2.radiusL),
+            ),
+            boxShadow: AppShadowsV2.soft,
           ),
           child: SafeArea(
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: AppSpacing.m,
-                vertical: AppSpacing.s,
+              padding: EdgeInsets.symmetric(
+                horizontal: AppSpacingV2.l,
+                vertical: AppSpacingV2.s,
               ),
               child: Row(
                 children: [
                   Container(
-                    padding: const EdgeInsets.all(8),
+                    padding: EdgeInsets.all(AppSpacingV2.s),
                     decoration: BoxDecoration(
                       gradient: const LinearGradient(
-                        colors: AppColors.gradientUnicorn,
+                        colors: AppColorsV2.gradientPrimary,
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
-                      borderRadius: BorderRadius.circular(12),
-                      boxShadow: AppShadows.neuSoft,
+                      borderRadius: AppSpacingV2.borderM,
+                      boxShadow: AppShadowsV2.soft,
                     ),
-                    child: const Text('🦄', style: TextStyle(fontSize: 20)),
+                    child: const Text('🧊', style: TextStyle(fontSize: 24)),
                   ),
-                  const SizedBox(width: 12),
+                  AppSpacingV2.hGapM,
                   Text(
                     'Tủ lạnh của tôi',
-                    style: AppTypography.titleLarge.copyWith(
-                      color: AppColors.textPrimary,
-                      fontWeight: FontWeight.w700,
+                    style: AppTypographyV2.titleLarge(
+                      color: AppColorsV2.charcoalSoft,
                     ),
                   ),
                   const Spacer(),
                   Container(
                     decoration: BoxDecoration(
-                      color: AppColors.backgroundNeu,
+                      color: AppColorsV2.pearlGray.withOpacity(0.5),
                       shape: BoxShape.circle,
-                      boxShadow: AppShadows.neuEmbossed,
+                      boxShadow: AppShadowsV2.subtle,
                     ),
                     child: IconButton(
-                      icon: const Icon(Icons.settings, color: AppColors.primaryLavender),
+                      icon: Icon(
+                        Icons.settings_rounded,
+                        color: AppColorsV2.roseQuartz,
+                        size: AppSpacingV2.iconL,
+                      ),
                       onPressed: () {
                         Navigator.push(
                           context,
@@ -139,18 +149,24 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
 
           return Column(
             children: [
-              const SizedBox(height: AppSpacing.m),
-              // Cute Search Bar
+              AppSpacingV2.gapL,
+              // Cute Search Bar V2
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.m),
-                child: CuteSearchBar(
+                padding: EdgeInsets.symmetric(horizontal: AppSpacingV2.l),
+                child: CuteSearchBarV2(
                   controller: _searchController,
+                  hintText: 'Tìm thực phẩm... 🔍',
+                  emoji: '🔍',
                   onChanged: (value) {
                     context.read<FoodProvider>().search(value);
                   },
+                  onClear: () {
+                    _searchController.clear();
+                    context.read<FoodProvider>().search('');
+                  },
                 ),
               ),
-              const SizedBox(height: AppSpacing.m),
+              AppSpacingV2.gapM,
               // Category filter
               CategoryFilter(
                 selectedCategory: provider.selectedCategory,
@@ -167,10 +183,14 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                   child: provider.foods.isEmpty
                       ? _buildEmptyState()
                       : ListView.builder(
+                          padding: EdgeInsets.only(
+                            top: AppSpacingV2.s,
+                            bottom: AppSpacingV2.huge + 60,
+                          ),
                           itemCount: provider.foods.length,
                           itemBuilder: (context, index) {
                             final food = provider.foods[index];
-                            return FoodCard(
+                            return FoodCardV2(
                               food: food,
                               onTap: () {
                                 Navigator.push(
@@ -200,54 +220,48 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
           );
         },
       ),
-      floatingActionButton: Container(
-        decoration: BoxDecoration(
-          color: AppColors.backgroundNeu,
-          borderRadius: const BorderRadius.all(Radius.circular(AppSpacing.radiusFull)),
-          boxShadow: AppShadows.neuStrong,
-        ),
-        child: Material(
-          color: Colors.transparent,
-          child: InkWell(
-            onTap: () async {
-              await Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => const AddFoodScreen()),
-              );
-              if (mounted) {
-                context.read<FoodProvider>().loadFoods();
-              }
-            },
-            borderRadius: BorderRadius.circular(AppSpacing.radiusFull),
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  colors: AppColors.gradientUnicorn,
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
+      floatingActionButton: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: () async {
+            await Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const AddFoodScreen()),
+            );
+            if (mounted) {
+              context.read<FoodProvider>().loadFoods();
+            }
+          },
+          borderRadius: AppSpacingV2.borderFull,
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: const LinearGradient(
+                colors: AppColorsV2.gradientPrimary,
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              borderRadius: AppSpacingV2.borderFull,
+              boxShadow: [
+                ...AppShadowsV2.medium,
+                ...AppShadowsV2.glowPrimary,
+              ],
+            ),
+            padding: EdgeInsets.symmetric(
+              horizontal: AppSpacingV2.xl,
+              vertical: AppSpacingV2.m,
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(Icons.add_rounded, color: Colors.white, size: 24),
+                AppSpacingV2.hGapS,
+                Text(
+                  'Thêm',
+                  style: AppTypographyV2.labelLarge(color: Colors.white),
                 ),
-                borderRadius: const BorderRadius.all(Radius.circular(AppSpacing.radiusFull)),
-              ),
-              padding: const EdgeInsets.symmetric(
-                horizontal: AppSpacing.l,
-                vertical: AppSpacing.m,
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Icon(Icons.add_rounded, color: Colors.white, size: 24),
-                  const SizedBox(width: 8),
-                  Text(
-                    'Thêm thực phẩm',
-                    style: AppTypography.titleSmall.copyWith(
-                      color: AppColors.textWhite,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  const Text('🦄', style: TextStyle(fontSize: 18)),
-                ],
-              ),
+                AppSpacingV2.hGapS,
+                const Text('✨', style: TextStyle(fontSize: 18)),
+              ],
             ),
           ),
         ),
