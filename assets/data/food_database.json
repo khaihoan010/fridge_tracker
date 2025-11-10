@@ -1,0 +1,1073 @@
+{
+  "vegetables": [
+    {
+      "id": "veg_001",
+      "name": "Cà chua bi",
+      "nameEn": "Cherry tomatoes",
+      "category": "vegetables",
+      "shelfLife": {
+        "pantry": 3,
+        "fridge": 7,
+        "freezer": 90
+      },
+      "keywords": ["ca chua", "tomato", "cherry"],
+      "storageTips": "Bảo quản ở nhiệt độ phòng để giữ hương vị tốt nhất"
+    },
+    {
+      "id": "veg_002",
+      "name": "Cà chua",
+      "nameEn": "Tomatoes",
+      "category": "vegetables",
+      "shelfLife": {
+        "pantry": 5,
+        "fridge": 7,
+        "freezer": 90
+      },
+      "keywords": ["ca chua", "tomato"],
+      "storageTips": "Để ở nhiệt độ phòng cho đến khi chín, sau đó bảo quản trong tủ lạnh"
+    },
+    {
+      "id": "veg_003",
+      "name": "Dưa chuột",
+      "nameEn": "Cucumber",
+      "category": "vegetables",
+      "shelfLife": {
+        "pantry": 3,
+        "fridge": 7,
+        "freezer": 60
+      },
+      "keywords": ["dua chuot", "cucumber"],
+      "storageTips": "Bảo quản trong tủ lạnh, tránh để gần chuối hoặc táo"
+    },
+    {
+      "id": "veg_004",
+      "name": "Cà rót",
+      "nameEn": "Carrots",
+      "category": "vegetables",
+      "shelfLife": {
+        "pantry": 5,
+        "fridge": 30,
+        "freezer": 180
+      },
+      "keywords": ["ca rot", "carrot", "cu ca rot"],
+      "storageTips": "Cắt bỏ lá xanh trước khi bảo quản để giữ độ tươi lâu hơn"
+    },
+    {
+      "id": "veg_005",
+      "name": "Khoai tây",
+      "nameEn": "Potatoes",
+      "category": "vegetables",
+      "shelfLife": {
+        "pantry": 60,
+        "fridge": 90,
+        "freezer": 180
+      },
+      "keywords": ["khoai tay", "potato", "cu khoai"],
+      "storageTips": "Bảo quản nơi khô ráo, thoáng mát, tránh ánh sáng mặt trời"
+    },
+    {
+      "id": "veg_006",
+      "name": "Khoai lang",
+      "nameEn": "Sweet potatoes",
+      "category": "vegetables",
+      "shelfLife": {
+        "pantry": 21,
+        "fridge": 60,
+        "freezer": 180
+      },
+      "keywords": ["khoai lang", "sweet potato"],
+      "storageTips": "Bảo quản ở nơi khô ráo, mát mẻ nhưng không quá lạnh"
+    },
+    {
+      "id": "veg_007",
+      "name": "Rau muống",
+      "nameEn": "Water spinach",
+      "category": "vegetables",
+      "shelfLife": {
+        "pantry": 1,
+        "fridge": 3,
+        "freezer": 30
+      },
+      "keywords": ["rau muong", "water spinach", "morning glory"],
+      "storageTips": "Rửa sạch, để ráo nước và bọc trong túi trước khi cho vào tủ lạnh"
+    },
+    {
+      "id": "veg_008",
+      "name": "Cải bó xôi",
+      "nameEn": "Spinach",
+      "category": "vegetables",
+      "shelfLife": {
+        "pantry": 1,
+        "fridge": 5,
+        "freezer": 30
+      },
+      "keywords": ["cai bo xoi", "spinach", "rau bi"],
+      "storageTips": "Bảo quản trong túi nhựa có lỗ thông khí"
+    },
+    {
+      "id": "veg_009",
+      "name": "Xà lách",
+      "nameEn": "Lettuce",
+      "category": "vegetables",
+      "shelfLife": {
+        "pantry": 1,
+        "fridge": 7,
+        "freezer": 30
+      },
+      "keywords": ["xa lach", "lettuce", "salad"],
+      "storageTips": "Bọc trong khăn giấy ẩm và cho vào túi nhựa"
+    },
+    {
+      "id": "veg_010",
+      "name": "Bông cải xanh",
+      "nameEn": "Broccoli",
+      "category": "vegetables",
+      "shelfLife": {
+        "pantry": 1,
+        "fridge": 7,
+        "freezer": 180
+      },
+      "keywords": ["bong cai xanh", "broccoli"],
+      "storageTips": "Không rửa trước khi bảo quản, bọc lỏng trong túi nhựa"
+    },
+    {
+      "id": "veg_011",
+      "name": "Bông cải trắng",
+      "nameEn": "Cauliflower",
+      "category": "vegetables",
+      "shelfLife": {
+        "pantry": 2,
+        "fridge": 7,
+        "freezer": 180
+      },
+      "keywords": ["bong cai trang", "cauliflower"],
+      "storageTips": "Bảo quản trong túi giấy hoặc túi nhựa có lỗ thông khí"
+    },
+    {
+      "id": "veg_012",
+      "name": "Cà tím",
+      "nameEn": "Eggplant",
+      "category": "vegetables",
+      "shelfLife": {
+        "pantry": 3,
+        "fridge": 7,
+        "freezer": 180
+      },
+      "keywords": ["ca tim", "eggplant", "aubergine"],
+      "storageTips": "Bảo quản ở nhiệt độ phòng cho đến khi cắt, sau đó cho vào tủ lạnh"
+    },
+    {
+      "id": "veg_013",
+      "name": "Ớt chuông",
+      "nameEn": "Bell pepper",
+      "category": "vegetables",
+      "shelfLife": {
+        "pantry": 3,
+        "fridge": 10,
+        "freezer": 180
+      },
+      "keywords": ["ot chuong", "bell pepper", "sweet pepper"],
+      "storageTips": "Bảo quản trong ngăn rau củ của tủ lạnh"
+    },
+    {
+      "id": "veg_014",
+      "name": "Ớt",
+      "nameEn": "Chili pepper",
+      "category": "vegetables",
+      "shelfLife": {
+        "pantry": 7,
+        "fridge": 14,
+        "freezer": 180
+      },
+      "keywords": ["ot", "chili", "hot pepper"],
+      "storageTips": "Có thể phơi khô để bảo quản lâu hơn"
+    },
+    {
+      "id": "veg_015",
+      "name": "Hành tây",
+      "nameEn": "Onion",
+      "category": "vegetables",
+      "shelfLife": {
+        "pantry": 60,
+        "fridge": 90,
+        "freezer": 180
+      },
+      "keywords": ["hanh tay", "onion", "cu hanh"],
+      "storageTips": "Bảo quản nơi khô ráo, thoáng mát, tránh ánh sáng trực tiếp"
+    },
+    {
+      "id": "veg_016",
+      "name": "Tỏi",
+      "nameEn": "Garlic",
+      "category": "vegetables",
+      "shelfLife": {
+        "pantry": 90,
+        "fridge": 120,
+        "freezer": 180
+      },
+      "keywords": ["toi", "garlic"],
+      "storageTips": "Bảo quản nơi khô ráo, thoáng mát"
+    },
+    {
+      "id": "veg_017",
+      "name": "Gừng",
+      "nameEn": "Ginger",
+      "category": "vegetables",
+      "shelfLife": {
+        "pantry": 7,
+        "fridge": 30,
+        "freezer": 180
+      },
+      "keywords": ["gung", "ginger"],
+      "storageTips": "Bọc trong giấy và cho vào túi nhựa"
+    },
+    {
+      "id": "veg_018",
+      "name": "Củ cải trắng",
+      "nameEn": "Daikon radish",
+      "category": "vegetables",
+      "shelfLife": {
+        "pantry": 3,
+        "fridge": 14,
+        "freezer": 180
+      },
+      "keywords": ["cu cai trang", "daikon", "white radish"],
+      "storageTips": "Cắt bỏ lá xanh trước khi bảo quản"
+    },
+    {
+      "id": "veg_019",
+      "name": "Cải thảo",
+      "nameEn": "Napa cabbage",
+      "category": "vegetables",
+      "shelfLife": {
+        "pantry": 3,
+        "fridge": 14,
+        "freezer": 90
+      },
+      "keywords": ["cai thao", "napa cabbage", "chinese cabbage"],
+      "storageTips": "Bọc trong túi nhựa và để trong ngăn rau củ"
+    },
+    {
+      "id": "veg_020",
+      "name": "Đậu cove",
+      "nameEn": "Green beans",
+      "category": "vegetables",
+      "shelfLife": {
+        "pantry": 1,
+        "fridge": 7,
+        "freezer": 240
+      },
+      "keywords": ["dau cove", "green beans", "string beans"],
+      "storageTips": "Bảo quản trong túi nhựa có lỗ thông khí"
+    }
+  ],
+  "fruits": [
+    {
+      "id": "fruit_001",
+      "name": "Táo",
+      "nameEn": "Apple",
+      "category": "fruits",
+      "shelfLife": {
+        "pantry": 7,
+        "fridge": 30,
+        "freezer": 240
+      },
+      "keywords": ["tao", "apple"],
+      "storageTips": "Bảo quản trong tủ lạnh để giữ độ giòn"
+    },
+    {
+      "id": "fruit_002",
+      "name": "Chuối",
+      "nameEn": "Banana",
+      "category": "fruits",
+      "shelfLife": {
+        "pantry": 5,
+        "fridge": 7,
+        "freezer": 90
+      },
+      "keywords": ["chuoi", "banana"],
+      "storageTips": "Để ở nhiệt độ phòng cho đến khi chín, có thể cho vào tủ lạnh khi đã chín"
+    },
+    {
+      "id": "fruit_003",
+      "name": "Cam",
+      "nameEn": "Orange",
+      "category": "fruits",
+      "shelfLife": {
+        "pantry": 7,
+        "fridge": 14,
+        "freezer": 180
+      },
+      "keywords": ["cam", "orange"],
+      "storageTips": "Bảo quản ở nhiệt độ phòng hoặc trong tủ lạnh"
+    },
+    {
+      "id": "fruit_004",
+      "name": "Xoài",
+      "nameEn": "Mango",
+      "category": "fruits",
+      "shelfLife": {
+        "pantry": 5,
+        "fridge": 7,
+        "freezer": 180
+      },
+      "keywords": ["xoai", "mango"],
+      "storageTips": "Để chín ở nhiệt độ phòng, sau đó bảo quản trong tủ lạnh"
+    },
+    {
+      "id": "fruit_005",
+      "name": "Dâu tây",
+      "nameEn": "Strawberry",
+      "category": "fruits",
+      "shelfLife": {
+        "pantry": 1,
+        "fridge": 5,
+        "freezer": 180
+      },
+      "keywords": ["dau tay", "strawberry"],
+      "storageTips": "Không rửa cho đến khi sẵn sàng ăn, bảo quản trong tủ lạnh"
+    },
+    {
+      "id": "fruit_006",
+      "name": "Nho",
+      "nameEn": "Grapes",
+      "category": "fruits",
+      "shelfLife": {
+        "pantry": 1,
+        "fridge": 7,
+        "freezer": 180
+      },
+      "keywords": ["nho", "grape"],
+      "storageTips": "Bảo quản trong túi nhựa có lỗ thông khí trong tủ lạnh"
+    },
+    {
+      "id": "fruit_007",
+      "name": "Dưa hấu",
+      "nameEn": "Watermelon",
+      "category": "fruits",
+      "shelfLife": {
+        "pantry": 7,
+        "fridge": 14,
+        "freezer": 180
+      },
+      "keywords": ["dua hau", "watermelon"],
+      "storageTips": "Bảo quản nguyên quả ở nhiệt độ phòng, sau khi cắt thì cho vào tủ lạnh"
+    },
+    {
+      "id": "fruit_008",
+      "name": "Thanh long",
+      "nameEn": "Dragon fruit",
+      "category": "fruits",
+      "shelfLife": {
+        "pantry": 3,
+        "fridge": 7,
+        "freezer": 90
+      },
+      "keywords": ["thanh long", "dragon fruit", "pitaya"],
+      "storageTips": "Bảo quản ở nhiệt độ phòng cho đến khi chín"
+    },
+    {
+      "id": "fruit_009",
+      "name": "Đu đủ",
+      "nameEn": "Papaya",
+      "category": "fruits",
+      "shelfLife": {
+        "pantry": 5,
+        "fridge": 7,
+        "freezer": 180
+      },
+      "keywords": ["du du", "papaya", "pawpaw"],
+      "storageTips": "Để chín ở nhiệt độ phòng, bảo quản trong tủ lạnh khi đã chín"
+    },
+    {
+      "id": "fruit_010",
+      "name": "Dứa",
+      "nameEn": "Pineapple",
+      "category": "fruits",
+      "shelfLife": {
+        "pantry": 3,
+        "fridge": 7,
+        "freezer": 180
+      },
+      "keywords": ["dua", "pineapple", "thom"],
+      "storageTips": "Bảo quản ở nhiệt độ phòng cho đến khi cắt"
+    },
+    {
+      "id": "fruit_011",
+      "name": "Bơ",
+      "nameEn": "Avocado",
+      "category": "fruits",
+      "shelfLife": {
+        "pantry": 5,
+        "fridge": 7,
+        "freezer": 120
+      },
+      "keywords": ["bo", "avocado"],
+      "storageTips": "Để chín ở nhiệt độ phòng, sau đó bảo quản trong tủ lạnh"
+    },
+    {
+      "id": "fruit_012",
+      "name": "Lê",
+      "nameEn": "Pear",
+      "category": "fruits",
+      "shelfLife": {
+        "pantry": 5,
+        "fridge": 30,
+        "freezer": 240
+      },
+      "keywords": ["le", "pear"],
+      "storageTips": "Để chín ở nhiệt độ phòng, sau đó bảo quản trong tủ lạnh"
+    },
+    {
+      "id": "fruit_013",
+      "name": "Kiwi",
+      "nameEn": "Kiwi",
+      "category": "fruits",
+      "shelfLife": {
+        "pantry": 5,
+        "fridge": 14,
+        "freezer": 240
+      },
+      "keywords": ["kiwi"],
+      "storageTips": "Bảo quản ở nhiệt độ phòng cho đến khi chín mềm"
+    },
+    {
+      "id": "fruit_014",
+      "name": "Chanh",
+      "nameEn": "Lime",
+      "category": "fruits",
+      "shelfLife": {
+        "pantry": 7,
+        "fridge": 14,
+        "freezer": 180
+      },
+      "keywords": ["chanh", "lime", "lemon"],
+      "storageTips": "Bảo quản trong tủ lạnh để giữ độ tươi"
+    },
+    {
+      "id": "fruit_015",
+      "name": "Chôm chôm",
+      "nameEn": "Rambutan",
+      "category": "fruits",
+      "shelfLife": {
+        "pantry": 3,
+        "fridge": 7,
+        "freezer": 90
+      },
+      "keywords": ["chom chom", "rambutan"],
+      "storageTips": "Bảo quản trong túi nhựa trong tủ lạnh"
+    },
+    {
+      "id": "fruit_016",
+      "name": "Vải",
+      "nameEn": "Lychee",
+      "category": "fruits",
+      "shelfLife": {
+        "pantry": 2,
+        "fridge": 7,
+        "freezer": 180
+      },
+      "keywords": ["vai", "lychee", "litchi"],
+      "storageTips": "Bảo quản trong túi nhựa trong tủ lạnh"
+    },
+    {
+      "id": "fruit_017",
+      "name": "Măng cụt",
+      "nameEn": "Mangosteen",
+      "category": "fruits",
+      "shelfLife": {
+        "pantry": 3,
+        "fridge": 7,
+        "freezer": 90
+      },
+      "keywords": ["mang cut", "mangosteen"],
+      "storageTips": "Bảo quản ở nhiệt độ phòng hoặc tủ lạnh"
+    },
+    {
+      "id": "fruit_018",
+      "name": "Sầu riêng",
+      "nameEn": "Durian",
+      "category": "fruits",
+      "shelfLife": {
+        "pantry": 2,
+        "fridge": 5,
+        "freezer": 90
+      },
+      "keywords": ["sau rieng", "durian"],
+      "storageTips": "Bảo quản trong túi kín để tránh mùi lan ra"
+    },
+    {
+      "id": "fruit_019",
+      "name": "Mít",
+      "nameEn": "Jackfruit",
+      "category": "fruits",
+      "shelfLife": {
+        "pantry": 3,
+        "fridge": 7,
+        "freezer": 90
+      },
+      "keywords": ["mit", "jackfruit"],
+      "storageTips": "Bảo quản múi mít trong hộp kín trong tủ lạnh"
+    },
+    {
+      "id": "fruit_020",
+      "name": "Ổi",
+      "nameEn": "Guava",
+      "category": "fruits",
+      "shelfLife": {
+        "pantry": 3,
+        "fridge": 7,
+        "freezer": 180
+      },
+      "keywords": ["oi", "guava"],
+      "storageTips": "Để chín ở nhiệt độ phòng, sau đó bảo quản trong tủ lạnh"
+    }
+  ],
+  "meats": [
+    {
+      "id": "meat_001",
+      "name": "Thịt heo nạc",
+      "nameEn": "Pork loin",
+      "category": "meat",
+      "shelfLife": {
+        "pantry": 0,
+        "fridge": 3,
+        "freezer": 180
+      },
+      "keywords": ["thit heo", "pork", "thit lon"],
+      "storageTips": "Bảo quản ở ngăn mát nhất của tủ lạnh, đông lạnh nếu không dùng trong 2 ngày"
+    },
+    {
+      "id": "meat_002",
+      "name": "Thịt heo ba chỉ",
+      "nameEn": "Pork belly",
+      "category": "meat",
+      "shelfLife": {
+        "pantry": 0,
+        "fridge": 3,
+        "freezer": 180
+      },
+      "keywords": ["thit ba chi", "pork belly", "bacon"],
+      "storageTips": "Bảo quản lạnh ngay sau khi mua"
+    },
+    {
+      "id": "meat_003",
+      "name": "Thịt bò nạc",
+      "nameEn": "Beef",
+      "category": "meat",
+      "shelfLife": {
+        "pantry": 0,
+        "fridge": 3,
+        "freezer": 180
+      },
+      "keywords": ["thit bo", "beef"],
+      "storageTips": "Bảo quản ở nhiệt độ 4°C hoặc thấp hơn"
+    },
+    {
+      "id": "meat_004",
+      "name": "Thịt gà",
+      "nameEn": "Chicken",
+      "category": "meat",
+      "shelfLife": {
+        "pantry": 0,
+        "fridge": 2,
+        "freezer": 270
+      },
+      "keywords": ["thit ga", "chicken"],
+      "storageTips": "Sử dụng trong vòng 1-2 ngày hoặc đông lạnh ngay"
+    },
+    {
+      "id": "meat_005",
+      "name": "Thịt gà đùi",
+      "nameEn": "Chicken thighs",
+      "category": "meat",
+      "shelfLife": {
+        "pantry": 0,
+        "fridge": 2,
+        "freezer": 270
+      },
+      "keywords": ["thit ga dui", "chicken thigh", "dui ga"],
+      "storageTips": "Bảo quản lạnh ngay, không rửa trước khi bảo quản"
+    },
+    {
+      "id": "meat_006",
+      "name": "Thịt gà ức",
+      "nameEn": "Chicken breast",
+      "category": "meat",
+      "shelfLife": {
+        "pantry": 0,
+        "fridge": 2,
+        "freezer": 270
+      },
+      "keywords": ["thit ga uc", "chicken breast", "uc ga"],
+      "storageTips": "Sử dụng trong 1-2 ngày hoặc đông lạnh"
+    },
+    {
+      "id": "meat_007",
+      "name": "Xúc xích",
+      "nameEn": "Sausage",
+      "category": "meat",
+      "shelfLife": {
+        "pantry": 0,
+        "fridge": 7,
+        "freezer": 60
+      },
+      "keywords": ["xuc xich", "sausage", "hot dog"],
+      "storageTips": "Bảo quản trong bao bì gốc cho đến khi sử dụng"
+    },
+    {
+      "id": "meat_008",
+      "name": "Thịt bò xay",
+      "nameEn": "Ground beef",
+      "category": "meat",
+      "shelfLife": {
+        "pantry": 0,
+        "fridge": 2,
+        "freezer": 120
+      },
+      "keywords": ["thit bo xay", "ground beef", "minced beef"],
+      "storageTips": "Sử dụng trong 1-2 ngày, đông lạnh nếu không dùng ngay"
+    },
+    {
+      "id": "meat_009",
+      "name": "Thịt heo xay",
+      "nameEn": "Ground pork",
+      "category": "meat",
+      "shelfLife": {
+        "pantry": 0,
+        "fridge": 2,
+        "freezer": 120
+      },
+      "keywords": ["thit heo xay", "ground pork", "minced pork"],
+      "storageTips": "Sử dụng trong 1-2 ngày hoặc đông lạnh"
+    },
+    {
+      "id": "meat_010",
+      "name": "Sườn heo",
+      "nameEn": "Pork ribs",
+      "category": "meat",
+      "shelfLife": {
+        "pantry": 0,
+        "fridge": 3,
+        "freezer": 180
+      },
+      "keywords": ["suon heo", "pork ribs", "suon"],
+      "storageTips": "Bảo quản lạnh ngay sau khi mua"
+    }
+  ],
+  "seafood": [
+    {
+      "id": "sea_001",
+      "name": "Cá hồi",
+      "nameEn": "Salmon",
+      "category": "seafood",
+      "shelfLife": {
+        "pantry": 0,
+        "fridge": 2,
+        "freezer": 90
+      },
+      "keywords": ["ca hoi", "salmon"],
+      "storageTips": "Sử dụng trong 1-2 ngày, bảo quản trên đá trong tủ lạnh"
+    },
+    {
+      "id": "sea_002",
+      "name": "Tôm",
+      "nameEn": "Shrimp",
+      "category": "seafood",
+      "shelfLife": {
+        "pantry": 0,
+        "fridge": 2,
+        "freezer": 180
+      },
+      "keywords": ["tom", "shrimp", "prawn"],
+      "storageTips": "Bảo quản lạnh ngay, sử dụng trong 1-2 ngày"
+    },
+    {
+      "id": "sea_003",
+      "name": "Cá thu",
+      "nameEn": "Mackerel",
+      "category": "seafood",
+      "shelfLife": {
+        "pantry": 0,
+        "fridge": 2,
+        "freezer": 90
+      },
+      "keywords": ["ca thu", "mackerel"],
+      "storageTips": "Làm sạch và bảo quản lạnh ngay"
+    },
+    {
+      "id": "sea_004",
+      "name": "Mực",
+      "nameEn": "Squid",
+      "category": "seafood",
+      "shelfLife": {
+        "pantry": 0,
+        "fridge": 2,
+        "freezer": 90
+      },
+      "keywords": ["muc", "squid", "calamari"],
+      "storageTips": "Làm sạch và bảo quản lạnh, sử dụng trong 1-2 ngày"
+    },
+    {
+      "id": "sea_005",
+      "name": "Cua",
+      "nameEn": "Crab",
+      "category": "seafood",
+      "shelfLife": {
+        "pantry": 0,
+        "fridge": 2,
+        "freezer": 90
+      },
+      "keywords": ["cua", "crab"],
+      "storageTips": "Bảo quản sống trong ngăn rau củ hoặc nấu chín rồi bảo quản"
+    },
+    {
+      "id": "sea_006",
+      "name": "Nghêu",
+      "nameEn": "Clams",
+      "category": "seafood",
+      "shelfLife": {
+        "pantry": 0,
+        "fridge": 2,
+        "freezer": 90
+      },
+      "keywords": ["ngheu", "clam"],
+      "storageTips": "Bảo quản sống trong túi lưới, không ngâm nước"
+    },
+    {
+      "id": "sea_007",
+      "name": "Sò",
+      "nameEn": "Oyster",
+      "category": "seafood",
+      "shelfLife": {
+        "pantry": 0,
+        "fridge": 7,
+        "freezer": 90
+      },
+      "keywords": ["so", "oyster"],
+      "storageTips": "Bảo quản sống trong túi lưới ở ngăn mát"
+    },
+    {
+      "id": "sea_008",
+      "name": "Cá diêu hồng",
+      "nameEn": "Tilapia",
+      "category": "seafood",
+      "shelfLife": {
+        "pantry": 0,
+        "fridge": 2,
+        "freezer": 180
+      },
+      "keywords": ["ca dieu hong", "tilapia"],
+      "storageTips": "Làm sạch và bảo quản lạnh ngay"
+    },
+    {
+      "id": "sea_009",
+      "name": "Cá ngừ",
+      "nameEn": "Tuna",
+      "category": "seafood",
+      "shelfLife": {
+        "pantry": 0,
+        "fridge": 2,
+        "freezer": 90
+      },
+      "keywords": ["ca ngu", "tuna"],
+      "storageTips": "Bảo quản trên đá trong tủ lạnh, sử dụng trong 1-2 ngày"
+    },
+    {
+      "id": "sea_010",
+      "name": "Bạch tuộc",
+      "nameEn": "Octopus",
+      "category": "seafood",
+      "shelfLife": {
+        "pantry": 0,
+        "fridge": 2,
+        "freezer": 90
+      },
+      "keywords": ["bach tuoc", "octopus"],
+      "storageTips": "Làm sạch và bảo quản lạnh ngay"
+    }
+  ],
+  "dairy": [
+    {
+      "id": "dairy_001",
+      "name": "Sữa tươi",
+      "nameEn": "Fresh milk",
+      "category": "dairy",
+      "shelfLife": {
+        "pantry": 0,
+        "fridge": 7,
+        "freezer": 90
+      },
+      "keywords": ["sua tuoi", "milk", "fresh milk"],
+      "storageTips": "Bảo quản ở nhiệt độ 4°C, đóng kín sau khi mở"
+    },
+    {
+      "id": "dairy_002",
+      "name": "Phô mai",
+      "nameEn": "Cheese",
+      "category": "dairy",
+      "shelfLife": {
+        "pantry": 0,
+        "fridge": 30,
+        "freezer": 180
+      },
+      "keywords": ["pho mai", "cheese"],
+      "storageTips": "Bọc kín để tránh khô, bảo quản trong tủ lạnh"
+    },
+    {
+      "id": "dairy_003",
+      "name": "Sữa chua",
+      "nameEn": "Yogurt",
+      "category": "dairy",
+      "shelfLife": {
+        "pantry": 0,
+        "fridge": 14,
+        "freezer": 60
+      },
+      "keywords": ["sua chua", "yogurt"],
+      "storageTips": "Bảo quản trong tủ lạnh, không để quá hạn sử dụng"
+    },
+    {
+      "id": "dairy_004",
+      "name": "Bơ",
+      "nameEn": "Butter",
+      "category": "dairy",
+      "shelfLife": {
+        "pantry": 0,
+        "fridge": 90,
+        "freezer": 270
+      },
+      "keywords": ["bo", "butter"],
+      "storageTips": "Bảo quản trong hộp kín trong tủ lạnh"
+    },
+    {
+      "id": "dairy_005",
+      "name": "Kem tươi",
+      "nameEn": "Cream",
+      "category": "dairy",
+      "shelfLife": {
+        "pantry": 0,
+        "fridge": 7,
+        "freezer": 120
+      },
+      "keywords": ["kem tuoi", "cream", "whipping cream"],
+      "storageTips": "Bảo quản lạnh, lắc đều trước khi sử dụng"
+    },
+    {
+      "id": "dairy_006",
+      "name": "Trứng gà",
+      "nameEn": "Chicken eggs",
+      "category": "dairy",
+      "shelfLife": {
+        "pantry": 7,
+        "fridge": 35,
+        "freezer": 0
+      },
+      "keywords": ["trung ga", "egg", "chicken egg"],
+      "storageTips": "Bảo quản trong tủ lạnh, không rửa trước khi bảo quản"
+    },
+    {
+      "id": "dairy_007",
+      "name": "Trứng vịt",
+      "nameEn": "Duck eggs",
+      "category": "dairy",
+      "shelfLife": {
+        "pantry": 7,
+        "fridge": 35,
+        "freezer": 0
+      },
+      "keywords": ["trung vit", "duck egg"],
+      "storageTips": "Bảo quản tương tự trứng gà"
+    }
+  ],
+  "bakery": [
+    {
+      "id": "bakery_001",
+      "name": "Bánh mì",
+      "nameEn": "Bread",
+      "category": "bakery",
+      "shelfLife": {
+        "pantry": 3,
+        "fridge": 7,
+        "freezer": 90
+      },
+      "keywords": ["banh mi", "bread"],
+      "storageTips": "Bảo quản ở nhiệt độ phòng trong túi kín"
+    },
+    {
+      "id": "bakery_002",
+      "name": "Bánh croissant",
+      "nameEn": "Croissant",
+      "category": "bakery",
+      "shelfLife": {
+        "pantry": 2,
+        "fridge": 5,
+        "freezer": 60
+      },
+      "keywords": ["croissant", "banh sua"],
+      "storageTips": "Ăn tươi trong ngày để ngon nhất"
+    },
+    {
+      "id": "bakery_003",
+      "name": "Bánh ngọt",
+      "nameEn": "Pastry",
+      "category": "bakery",
+      "shelfLife": {
+        "pantry": 2,
+        "fridge": 5,
+        "freezer": 60
+      },
+      "keywords": ["banh ngot", "pastry", "cake"],
+      "storageTips": "Bảo quản trong hộp kín"
+    }
+  ],
+  "frozen": [
+    {
+      "id": "frozen_001",
+      "name": "Kem",
+      "nameEn": "Ice cream",
+      "category": "frozen",
+      "shelfLife": {
+        "pantry": 0,
+        "fridge": 0,
+        "freezer": 60
+      },
+      "keywords": ["kem", "ice cream"],
+      "storageTips": "Bảo quản trong ngăn đông, không để tan rã"
+    },
+    {
+      "id": "frozen_002",
+      "name": "Khoai tây chiên đông lạnh",
+      "nameEn": "Frozen french fries",
+      "category": "frozen",
+      "shelfLife": {
+        "pantry": 0,
+        "fridge": 0,
+        "freezer": 180
+      },
+      "keywords": ["khoai tay chien", "french fries", "fries"],
+      "storageTips": "Giữ đông lạnh cho đến khi chế biến"
+    },
+    {
+      "id": "frozen_003",
+      "name": "Đậu đông lạnh",
+      "nameEn": "Frozen peas",
+      "category": "frozen",
+      "shelfLife": {
+        "pantry": 0,
+        "fridge": 0,
+        "freezer": 240
+      },
+      "keywords": ["dau dong lanh", "frozen peas"],
+      "storageTips": "Bảo quản trong ngăn đông"
+    }
+  ],
+  "beverages": [
+    {
+      "id": "bev_001",
+      "name": "Nước cam ép",
+      "nameEn": "Orange juice",
+      "category": "beverages",
+      "shelfLife": {
+        "pantry": 0,
+        "fridge": 7,
+        "freezer": 90
+      },
+      "keywords": ["nuoc cam", "orange juice", "juice"],
+      "storageTips": "Bảo quản lạnh sau khi mở, sử dụng trong 7 ngày"
+    },
+    {
+      "id": "bev_002",
+      "name": "Nước ngọt",
+      "nameEn": "Soft drink",
+      "category": "beverages",
+      "shelfLife": {
+        "pantry": 270,
+        "fridge": 270,
+        "freezer": 0
+      },
+      "keywords": ["nuoc ngot", "soft drink", "soda"],
+      "storageTips": "Bảo quản ở nhiệt độ phòng, uống lạnh ngon hơn"
+    },
+    {
+      "id": "bev_003",
+      "name": "Trà xanh",
+      "nameEn": "Green tea",
+      "category": "beverages",
+      "shelfLife": {
+        "pantry": 365,
+        "fridge": 365,
+        "freezer": 0
+      },
+      "keywords": ["tra xanh", "green tea", "tea"],
+      "storageTips": "Bảo quản nơi khô ráo, tránh ánh sáng"
+    }
+  ],
+  "condiments": [
+    {
+      "id": "cond_001",
+      "name": "Tương ớt",
+      "nameEn": "Hot sauce",
+      "category": "condiments",
+      "shelfLife": {
+        "pantry": 180,
+        "fridge": 365,
+        "freezer": 0
+      },
+      "keywords": ["tuong ot", "hot sauce", "chili sauce"],
+      "storageTips": "Bảo quản trong tủ lạnh sau khi mở"
+    },
+    {
+      "id": "cond_002",
+      "name": "Tương cà",
+      "nameEn": "Ketchup",
+      "category": "condiments",
+      "shelfLife": {
+        "pantry": 365,
+        "fridge": 365,
+        "freezer": 0
+      },
+      "keywords": ["tuong ca", "ketchup", "tomato sauce"],
+      "storageTips": "Bảo quản trong tủ lạnh sau khi mở"
+    },
+    {
+      "id": "cond_003",
+      "name": "Nước mắm",
+      "nameEn": "Fish sauce",
+      "category": "condiments",
+      "shelfLife": {
+        "pantry": 730,
+        "fridge": 730,
+        "freezer": 0
+      },
+      "keywords": ["nuoc mam", "fish sauce"],
+      "storageTips": "Bảo quản ở nhiệt độ phòng hoặc tủ lạnh"
+    },
+    {
+      "id": "cond_004",
+      "name": "Dầu ăn",
+      "nameEn": "Cooking oil",
+      "category": "condiments",
+      "shelfLife": {
+        "pantry": 365,
+        "fridge": 0,
+        "freezer": 0
+      },
+      "keywords": ["dau an", "cooking oil", "oil"],
+      "storageTips": "Bảo quản nơi khô ráo, tránh ánh sáng trực tiếp"
+    },
+    {
+      "id": "cond_005",
+      "name": "Nước tương",
+      "nameEn": "Soy sauce",
+      "category": "condiments",
+      "shelfLife": {
+        "pantry": 730,
+        "fridge": 730,
+        "freezer": 0
+      },
+      "keywords": ["nuoc tuong", "soy sauce"],
+      "storageTips": "Bảo quản ở nhiệt độ phòng hoặc tủ lạnh"
+    }
+  ]
+}
