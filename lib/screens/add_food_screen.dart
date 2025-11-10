@@ -89,30 +89,12 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
             boxShadow: AppShadowsV2.subtle,
           ),
           child: IconButton(
-            icon: Icon(
-              Icons.arrow_back_rounded,
-              color: AppColorsV2.roseQuartz,
-            ),
+            icon: Icon(Icons.arrow_back_rounded, color: AppColorsV2.roseQuartz),
             onPressed: () => Navigator.pop(context),
           ),
         ),
         title: Row(
           children: [
-            Container(
-              padding: EdgeInsets.all(AppSpacingV2.s),
-              decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  colors: AppColorsV2.gradientPrimary,
-                ),
-                borderRadius: AppSpacingV2.borderM,
-                boxShadow: AppShadowsV2.soft,
-              ),
-              child: Text(
-                _isEditing ? '✏️' : '✨',
-                style: const TextStyle(fontSize: 20),
-              ),
-            ),
-            AppSpacingV2.hGapM,
             Text(
               _isEditing ? 'Sửa thực phẩm' : 'Thêm thực phẩm',
               style: AppTypographyV2.titleLarge(
@@ -143,15 +125,12 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                   ),
                   child: Row(
                     children: [
-                      const Text('💾', style: TextStyle(fontSize: 16)),
                       AppSpacingV2.hGapXs,
                       Text(
                         'Lưu',
                         style: AppTypographyV2.labelMedium(
                           color: Colors.white,
-                        ).copyWith(
-                          fontWeight: FontWeight.w600,
-                        ),
+                        ).copyWith(fontWeight: FontWeight.w600),
                       ),
                     ],
                   ),
@@ -274,7 +253,9 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                     color: AppColorsV2.charcoalSoft,
                   ),
                   border: InputBorder.none,
-                  contentPadding: EdgeInsets.symmetric(vertical: AppSpacingV2.m),
+                  contentPadding: EdgeInsets.symmetric(
+                    vertical: AppSpacingV2.m,
+                  ),
                 ),
                 items: FoodCategory.defaultCategories.map((cat) {
                   return DropdownMenuItem(
@@ -323,7 +304,9 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                     color: AppColorsV2.charcoalSoft,
                   ),
                   border: InputBorder.none,
-                  contentPadding: EdgeInsets.symmetric(vertical: AppSpacingV2.m),
+                  contentPadding: EdgeInsets.symmetric(
+                    vertical: AppSpacingV2.m,
+                  ),
                 ),
                 items: StorageLocation.defaultLocations.map((loc) {
                   return DropdownMenuItem(
@@ -434,13 +417,16 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                           color: AppColorsV2.charcoalSoft,
                         ),
                         border: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(vertical: AppSpacingV2.m),
+                        contentPadding: EdgeInsets.symmetric(
+                          vertical: AppSpacingV2.m,
+                        ),
                       ),
                       items: AppConstants.units.map((unit) {
                         return DropdownMenuItem(value: unit, child: Text(unit));
                       }).toList(),
                       onChanged: (value) {
-                        if (value != null) setState(() => _selectedUnit = value);
+                        if (value != null)
+                          setState(() => _selectedUnit = value);
                       },
                     ),
                   ),
@@ -468,12 +454,20 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                 ),
               ),
               child: ListTile(
-                title: Text('Ngày mua', style: AppTypographyV2.labelMedium(color: AppColorsV2.charcoalSoft)),
+                title: Text(
+                  'Ngày mua',
+                  style: AppTypographyV2.labelMedium(
+                    color: AppColorsV2.charcoalSoft,
+                  ),
+                ),
                 subtitle: Text(
                   DateFormat('dd/MM/yyyy').format(_purchaseDate),
                   style: AppTypographyV2.bodyMedium(),
                 ),
-                trailing: Icon(Icons.calendar_today_rounded, color: AppColorsV2.roseQuartz),
+                trailing: Icon(
+                  Icons.calendar_today_rounded,
+                  color: AppColorsV2.roseQuartz,
+                ),
                 onTap: () => _selectDate(context, true),
               ),
             ),
@@ -529,7 +523,10 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                     ],
                   ],
                 ),
-                trailing: Icon(Icons.calendar_today_rounded, color: AppColorsV2.roseQuartz),
+                trailing: Icon(
+                  Icons.calendar_today_rounded,
+                  color: AppColorsV2.roseQuartz,
+                ),
                 onTap: () => _selectDate(context, false),
               ),
             ),
@@ -556,13 +553,18 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
               child: ListTile(
                 title: Text(
                   'Mã vạch',
-                  style: AppTypographyV2.labelMedium(color: AppColorsV2.charcoalSoft),
+                  style: AppTypographyV2.labelMedium(
+                    color: AppColorsV2.charcoalSoft,
+                  ),
                 ),
                 subtitle: Text(
                   _barcode ?? 'Chưa quét',
                   style: AppTypographyV2.bodyMedium(),
                 ),
-                trailing: Icon(Icons.qr_code_scanner_rounded, color: AppColorsV2.roseQuartz),
+                trailing: Icon(
+                  Icons.qr_code_scanner_rounded,
+                  color: AppColorsV2.roseQuartz,
+                ),
                 onTap: _scanBarcode,
               ),
             ),
@@ -653,7 +655,11 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                             boxShadow: AppShadowsV2.strong,
                           ),
                           child: IconButton(
-                            icon: const Icon(Icons.close, color: Colors.white, size: 20),
+                            icon: const Icon(
+                              Icons.close,
+                              color: Colors.white,
+                              size: 20,
+                            ),
                             onPressed: () => setState(() => _imagePath = null),
                           ),
                         ),
@@ -673,7 +679,11 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                         shape: BoxShape.circle,
                         boxShadow: AppShadowsV2.strong,
                       ),
-                      child: const Icon(Icons.add_a_photo, size: 40, color: Colors.white),
+                      child: const Icon(
+                        Icons.add_a_photo,
+                        size: 40,
+                        color: Colors.white,
+                      ),
                     ),
                     const SizedBox(height: AppSpacingV2.s),
                     Text(
@@ -727,12 +737,17 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                     shape: BoxShape.circle,
                     boxShadow: AppShadowsV2.subtle,
                   ),
-                  child: const Icon(Icons.camera_alt, color: Colors.white, size: 20),
+                  child: const Icon(
+                    Icons.camera_alt,
+                    color: Colors.white,
+                    size: 20,
+                  ),
                 ),
                 title: Text('Chụp ảnh', style: AppTypographyV2.bodyMedium()),
                 onTap: () async {
                   Navigator.pop(context);
-                  final image = await ImageService.instance.pickImageFromCamera();
+                  final image = await ImageService.instance
+                      .pickImageFromCamera();
                   if (image != null) {
                     setState(() => _imagePath = image.path);
                   }
@@ -748,12 +763,20 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                     shape: BoxShape.circle,
                     boxShadow: AppShadowsV2.subtle,
                   ),
-                  child: const Icon(Icons.photo_library, color: Colors.white, size: 20),
+                  child: const Icon(
+                    Icons.photo_library,
+                    color: Colors.white,
+                    size: 20,
+                  ),
                 ),
-                title: Text('Chọn từ thư viện', style: AppTypographyV2.bodyMedium()),
+                title: Text(
+                  'Chọn từ thư viện',
+                  style: AppTypographyV2.bodyMedium(),
+                ),
                 onTap: () async {
                   Navigator.pop(context);
-                  final image = await ImageService.instance.pickImageFromGallery();
+                  final image = await ImageService.instance
+                      .pickImageFromGallery();
                   if (image != null) {
                     setState(() => _imagePath = image.path);
                   }
@@ -846,7 +869,9 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
 
         // Tự động tính hạn sử dụng
         if (productInfo.expiryDays != null) {
-          _expiryDate = _purchaseDate.add(Duration(days: productInfo.expiryDays!));
+          _expiryDate = _purchaseDate.add(
+            Duration(days: productInfo.expiryDays!),
+          );
         }
 
         // Gợi ý category dựa trên primary category
@@ -872,7 +897,9 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Không tìm thấy thông tin sản phẩm. Vui lòng nhập thủ công.'),
+            content: Text(
+              'Không tìm thấy thông tin sản phẩm. Vui lòng nhập thủ công.',
+            ),
             backgroundColor: Colors.orange,
           ),
         );
@@ -886,23 +913,27 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
 
     final categoryLower = category.toLowerCase();
 
-    if (categoryLower.contains('vegetable') || categoryLower.contains('produce')) {
+    if (categoryLower.contains('vegetable') ||
+        categoryLower.contains('produce')) {
       return 'vegetables';
     } else if (categoryLower.contains('fruit')) {
       return 'fruits';
     } else if (categoryLower.contains('meat') ||
-               categoryLower.contains('beef') ||
-               categoryLower.contains('pork')) {
+        categoryLower.contains('beef') ||
+        categoryLower.contains('pork')) {
       return 'meat';
-    } else if (categoryLower.contains('fish') || categoryLower.contains('seafood')) {
+    } else if (categoryLower.contains('fish') ||
+        categoryLower.contains('seafood')) {
       return 'seafood';
     } else if (categoryLower.contains('milk') ||
-               categoryLower.contains('dairy') ||
-               categoryLower.contains('cheese')) {
+        categoryLower.contains('dairy') ||
+        categoryLower.contains('cheese')) {
       return 'dairy';
-    } else if (categoryLower.contains('beverage') || categoryLower.contains('drink')) {
+    } else if (categoryLower.contains('beverage') ||
+        categoryLower.contains('drink')) {
       return 'beverages';
-    } else if (categoryLower.contains('snack') || categoryLower.contains('dessert')) {
+    } else if (categoryLower.contains('snack') ||
+        categoryLower.contains('dessert')) {
       return 'snacks';
     } else if (categoryLower.contains('frozen')) {
       return 'frozen';
@@ -951,7 +982,9 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
       expiryDate: _expiryDate,
       quantity: double.parse(_quantityController.text),
       unit: _selectedUnit,
-      notes: _notesController.text.trim().isEmpty ? null : _notesController.text.trim(),
+      notes: _notesController.text.trim().isEmpty
+          ? null
+          : _notesController.text.trim(),
       imagePath: _imagePath,
       barcode: _barcode,
     );
@@ -969,7 +1002,11 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
     if (success && mounted) {
       Navigator.pop(context);
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(_isEditing ? 'Đã cập nhật thực phẩm' : 'Đã thêm thực phẩm')),
+        SnackBar(
+          content: Text(
+            _isEditing ? 'Đã cập nhật thực phẩm' : 'Đã thêm thực phẩm',
+          ),
+        ),
       );
     }
   }
