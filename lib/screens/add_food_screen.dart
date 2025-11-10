@@ -168,18 +168,85 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
               fieldViewBuilder: (context, controller, focusNode, onEditingComplete) {
                 // Sync with _nameController
                 _nameController.text = controller.text;
-                return CuteInputFieldV2(
-                  controller: controller,
-                  focusNode: focusNode,
-                  labelText: 'Tên thực phẩm',
-                  hintText: 'VD: Cà chua bi',
-                  icon: Icons.search_rounded,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Vui lòng nhập tên thực phẩm';
-                    }
-                    return null;
-                  },
+
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Label
+                    Row(
+                      children: [
+                        Text(
+                          'Tên thực phẩm',
+                          style: AppTypographyV2.labelMedium(
+                            color: AppColorsV2.charcoalSoft,
+                          ),
+                        ),
+                      ],
+                    ),
+                    AppSpacingV2.gapS,
+
+                    // Input field
+                    Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            AppColorsV2.snowWhite,
+                            AppColorsV2.pearlGray.withOpacity(0.3),
+                          ],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                        borderRadius: AppSpacingV2.borderM,
+                        boxShadow: AppShadowsV2.soft,
+                        border: Border.all(
+                          color: AppColorsV2.doveGray.withOpacity(0.3),
+                          width: 1,
+                        ),
+                      ),
+                      child: TextFormField(
+                        controller: controller,
+                        focusNode: focusNode,
+                        onEditingComplete: onEditingComplete,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Vui lòng nhập tên thực phẩm';
+                          }
+                          return null;
+                        },
+                        style: AppTypographyV2.bodyMedium(),
+                        decoration: InputDecoration(
+                          hintText: 'VD: Cà chua bi',
+                          hintStyle: AppTypographyV2.bodyMedium(
+                            color: AppColorsV2.slateMuted,
+                          ),
+                          prefixIcon: Container(
+                            width: 50,
+                            alignment: Alignment.center,
+                            child: Container(
+                              padding: AppSpacingV2.paddingS,
+                              decoration: BoxDecoration(
+                                gradient: const LinearGradient(
+                                  colors: AppColorsV2.gradientPrimary,
+                                ),
+                                shape: BoxShape.circle,
+                                boxShadow: AppShadowsV2.subtle,
+                              ),
+                              child: Icon(
+                                Icons.search_rounded,
+                                size: AppSpacingV2.iconS,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                          border: InputBorder.none,
+                          contentPadding: EdgeInsets.symmetric(
+                            horizontal: AppSpacingV2.l,
+                            vertical: AppSpacingV2.m,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 );
               },
               optionsViewBuilder: (context, onSelected, options) {
