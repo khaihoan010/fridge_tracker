@@ -21,7 +21,8 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin {
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
   final TextEditingController _searchController = TextEditingController();
 
@@ -94,20 +95,20 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
               ),
               child: Row(
                 children: [
-                  Container(
-                    padding: EdgeInsets.all(AppSpacingV2.s),
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        colors: AppColorsV2.gradientPrimary,
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                      borderRadius: AppSpacingV2.borderM,
-                      boxShadow: AppShadowsV2.soft,
-                    ),
-                    child: const Text('🧊', style: TextStyle(fontSize: 24)),
-                  ),
-                  AppSpacingV2.hGapM,
+                  // Container(
+                  //   padding: EdgeInsets.all(AppSpacingV2.s),
+                  //   decoration: BoxDecoration(
+                  //     gradient: const LinearGradient(
+                  //       colors: AppColorsV2.gradientPrimary,
+                  //       begin: Alignment.topLeft,
+                  //       end: Alignment.bottomRight,
+                  //     ),
+                  //     borderRadius: AppSpacingV2.borderM,
+                  //     boxShadow: AppShadowsV2.soft,
+                  //   ),
+                  //   child: const Text('🧊', style: TextStyle(fontSize: 24)),
+                  // ),
+                  // AppSpacingV2.hGapM,
                   Text(
                     'Tủ lạnh của tôi',
                     style: AppTypographyV2.titleLarge(
@@ -130,7 +131,9 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (_) => const SettingsScreen()),
+                          MaterialPageRoute(
+                            builder: (_) => const SettingsScreen(),
+                          ),
                         );
                       },
                     ),
@@ -155,7 +158,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                 padding: EdgeInsets.symmetric(horizontal: AppSpacingV2.l),
                 child: CuteSearchBarV2(
                   controller: _searchController,
-                  hintText: 'Tìm thực phẩm... 🔍',
+                  hintText: 'Tìm thực phẩm... ',
                   emoji: '🔍',
                   onChanged: (value) {
                     context.read<FoodProvider>().search(value);
@@ -196,7 +199,8 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (_) => FoodDetailScreen(food: food),
+                                    builder: (_) =>
+                                        FoodDetailScreen(food: food),
                                   ),
                                 ).then((_) => provider.loadFoods());
                               },
@@ -241,10 +245,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                 end: Alignment.bottomRight,
               ),
               borderRadius: AppSpacingV2.borderFull,
-              boxShadow: [
-                ...AppShadowsV2.medium,
-                ...AppShadowsV2.glowPrimary,
-              ],
+              boxShadow: [...AppShadowsV2.medium, ...AppShadowsV2.glowPrimary],
             ),
             padding: EdgeInsets.symmetric(
               horizontal: AppSpacingV2.xl,
@@ -259,8 +260,6 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                   'Thêm',
                   style: AppTypographyV2.labelLarge(color: Colors.white),
                 ),
-                AppSpacingV2.hGapS,
-                const Text('✨', style: TextStyle(fontSize: 18)),
               ],
             ),
           ),
@@ -333,9 +332,9 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
             onPressed: () {
               context.read<FoodProvider>().deleteFood(food);
               Navigator.pop(context);
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Đã xóa thực phẩm')),
-              );
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(const SnackBar(content: Text('Đã xóa thực phẩm')));
             },
             child: const Text('Xóa'),
           ),
