@@ -13,11 +13,12 @@ import '../providers/settings_provider.dart';
 import '../services/barcode_service.dart';
 import '../services/image_service.dart';
 import '../utils/constants.dart';
-import '../utils/app_colors.dart';
-import '../utils/app_typography.dart';
-import '../utils/app_spacing.dart';
-import '../utils/app_shadows.dart';
-import '../widgets/cute/cute_button.dart';
+import '../utils/app_colors_v2.dart';
+import '../utils/app_typography_v2.dart';
+import '../utils/app_spacing_v2.dart';
+import '../utils/app_shadows_v2.dart';
+import '../widgets/cute/cute_button_v2.dart';
+import '../widgets/cute/cute_input_field_v2.dart';
 
 class AddFoodScreen extends StatefulWidget {
   final FoodItem? food;
@@ -74,81 +75,78 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundNeu,
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(kToolbarHeight),
-        child: Container(
+      backgroundColor: AppColorsV2.snowWhite,
+      appBar: AppBar(
+        backgroundColor: AppColorsV2.snowWhite,
+        elevation: 0,
+        leading: Container(
+          margin: EdgeInsets.all(AppSpacingV2.s),
           decoration: BoxDecoration(
-            color: AppColors.backgroundNeu,
-            boxShadow: AppShadows.neuEmbossed,
+            color: AppColorsV2.pearlGray.withOpacity(0.5),
+            shape: BoxShape.circle,
+            boxShadow: AppShadowsV2.subtle,
           ),
-          child: AppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            leading: Container(
-              margin: const EdgeInsets.all(8),
+          child: IconButton(
+            icon: Icon(
+              Icons.arrow_back_rounded,
+              color: AppColorsV2.roseQuartz,
+            ),
+            onPressed: () => Navigator.pop(context),
+          ),
+        ),
+        title: Row(
+          children: [
+            Container(
+              padding: EdgeInsets.all(AppSpacingV2.s),
               decoration: BoxDecoration(
-                color: AppColors.backgroundNeu,
-                shape: BoxShape.circle,
-                boxShadow: AppShadows.neuSoft,
+                gradient: const LinearGradient(
+                  colors: AppColorsV2.gradientPrimary,
+                ),
+                borderRadius: AppSpacingV2.borderM,
+                boxShadow: AppShadowsV2.soft,
               ),
-              child: IconButton(
-                icon: const Icon(Icons.arrow_back, color: AppColors.primaryLavender),
-                onPressed: () => Navigator.pop(context),
+              child: Text(
+                _isEditing ? '✏️' : '✨',
+                style: const TextStyle(fontSize: 20),
               ),
             ),
-            title: Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(6),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: AppColors.gradientUnicorn,
-                    ),
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: AppShadows.neuSoft,
-                  ),
-                  child: Text(
-                    _isEditing ? '✏️' : '➕',
-                    style: const TextStyle(fontSize: 18),
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Text(
-                  _isEditing ? 'Sửa thực phẩm' : 'Thêm thực phẩm',
-                  style: AppTypography.titleLarge.copyWith(
-                    color: AppColors.textPrimary,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-              ],
+            AppSpacingV2.hGapM,
+            Text(
+              _isEditing ? 'Sửa thực phẩm' : 'Thêm thực phẩm',
+              style: AppTypographyV2.titleLarge(
+                color: AppColorsV2.charcoalSoft,
+              ),
             ),
-            actions: [
-              Padding(
-                padding: const EdgeInsets.only(right: 12),
+          ],
+        ),
+        actions: [
+          Padding(
+            padding: EdgeInsets.only(right: AppSpacingV2.m),
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                onTap: _saveFood,
+                borderRadius: AppSpacingV2.borderFull,
                 child: Container(
                   decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: AppColors.gradientUnicorn,
+                    gradient: const LinearGradient(
+                      colors: AppColorsV2.gradientPrimary,
                     ),
-                    borderRadius: BorderRadius.circular(AppSpacing.radiusFull),
-                    boxShadow: AppShadows.neuStrong,
+                    borderRadius: AppSpacingV2.borderFull,
+                    boxShadow: AppShadowsV2.medium,
                   ),
-                  child: Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      onTap: _saveFood,
-                      borderRadius: BorderRadius.circular(AppSpacing.radiusFull),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                        child: Row(
-                          children: [
-                            const Text('💾', style: TextStyle(fontSize: 16)),
-                            const SizedBox(width: 6),
-                            Text(
-                              'Lưu',
-                              style: AppTypography.bodyMedium.copyWith(
-                                color: Colors.white,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: AppSpacingV2.l,
+                    vertical: AppSpacingV2.m,
+                  ),
+                  child: Row(
+                    children: [
+                      const Text('💾', style: TextStyle(fontSize: 16)),
+                      AppSpacingV2.hGapXs,
+                      Text(
+                        'Lưu',
+                        style: AppTypographyV2.labelMedium(
+                          color: Colors.white,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
@@ -166,76 +164,47 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
       body: Form(
         key: _formKey,
         child: ListView(
-          padding: const EdgeInsets.all(AppSpacing.m),
+          padding: EdgeInsets.all(AppSpacingV2.l),
           children: [
             // Image
             _buildImageSection(),
-            const SizedBox(height: 24),
+            AppSpacingV2.gapXl,
 
-            // Name
-            Container(
-              decoration: BoxDecoration(
-                color: AppColors.backgroundNeu,
-                borderRadius: BorderRadius.circular(AppSpacing.radiusL),
-                boxShadow: AppShadows.neuDebossed, // Inset effect for inputs
-              ),
-              child: TextFormField(
-                controller: _nameController,
-                style: AppTypography.bodyMedium,
-                decoration: InputDecoration(
-                  labelText: 'Tên thực phẩm *',
-                  labelStyle: AppTypography.bodyMedium.copyWith(
-                    color: AppColors.textLight,
-                  ),
-                  prefixIcon: Container(
-                    margin: const EdgeInsets.all(10),
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: AppColors.gradientUnicorn,
-                      ),
-                      shape: BoxShape.circle,
-                      boxShadow: AppShadows.neuSoft,
-                    ),
-                    child: const Icon(Icons.inventory_2, color: Colors.white, size: 18),
-                  ),
-                  filled: true,
-                  fillColor: AppColors.backgroundNeu,
-                  border: InputBorder.none,
-                  contentPadding: const EdgeInsets.symmetric(
-                    horizontal: AppSpacing.m,
-                    vertical: AppSpacing.m,
-                  ),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Vui lòng nhập tên thực phẩm';
-                  }
-                  return null;
-                },
-              ),
+            // Name - Using CuteInputFieldV2
+            CuteInputFieldV2(
+              controller: _nameController,
+              labelText: 'Tên thực phẩm',
+              hintText: 'VD: Cà chua bi',
+              emoji: '🍎',
+              icon: Icons.inventory_2_rounded,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Vui lòng nhập tên thực phẩm';
+                }
+                return null;
+              },
             ),
-            const SizedBox(height: AppSpacing.m),
+            AppSpacingV2.gapL,
 
             // Category
             Container(
               decoration: BoxDecoration(
-                color: AppColors.backgroundNeu,
-                borderRadius: BorderRadius.circular(AppSpacing.radiusL),
-                boxShadow: AppShadows.neuEmbossed, // Raised effect for dropdowns
+                color: AppColorsV2.snowWhite,
+                borderRadius: BorderRadius.circular(AppSpacingV2.radiusL),
+                boxShadow: AppShadowsV2.neuEmbossed, // Raised effect for dropdowns
               ),
-              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.m),
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacingV2.m),
               child: DropdownButtonFormField<String>(
                 value: _selectedCategory,
-                style: AppTypography.bodyMedium,
+                style: AppTypographyV2.bodyMedium,
                 decoration: InputDecoration(
                   labelText: 'Danh mục',
-                  labelStyle: AppTypography.bodyMedium.copyWith(
-                    color: AppColors.textLight,
+                  labelStyle: AppTypographyV2.bodyMedium.copyWith(
+                    color: AppColorsV2.textLight,
                   ),
                   prefixIcon: const Text('🏷️', style: TextStyle(fontSize: 20)),
                   border: InputBorder.none,
-                  contentPadding: const EdgeInsets.symmetric(vertical: AppSpacing.m),
+                  contentPadding: const EdgeInsets.symmetric(vertical: AppSpacingV2.m),
                 ),
                 items: FoodCategory.defaultCategories.map((cat) {
                   return DropdownMenuItem(
@@ -254,27 +223,27 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                 },
               ),
             ),
-            const SizedBox(height: AppSpacing.m),
+            const SizedBox(height: AppSpacingV2.m),
 
             // Storage Location
             Container(
               decoration: BoxDecoration(
-                color: AppColors.backgroundNeu,
-                borderRadius: BorderRadius.circular(AppSpacing.radiusL),
-                boxShadow: AppShadows.neuEmbossed,
+                color: AppColorsV2.snowWhite,
+                borderRadius: BorderRadius.circular(AppSpacingV2.radiusL),
+                boxShadow: AppShadowsV2.neuEmbossed,
               ),
-              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.m),
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacingV2.m),
               child: DropdownButtonFormField<String>(
                 value: _selectedLocation,
-                style: AppTypography.bodyMedium,
+                style: AppTypographyV2.bodyMedium,
                 decoration: InputDecoration(
                   labelText: 'Vị trí lưu trữ',
-                  labelStyle: AppTypography.bodyMedium.copyWith(
-                    color: AppColors.textLight,
+                  labelStyle: AppTypographyV2.bodyMedium.copyWith(
+                    color: AppColorsV2.textLight,
                   ),
                   prefixIcon: const Text('📍', style: TextStyle(fontSize: 20)),
                   border: InputBorder.none,
-                  contentPadding: const EdgeInsets.symmetric(vertical: AppSpacing.m),
+                  contentPadding: const EdgeInsets.symmetric(vertical: AppSpacingV2.m),
                 ),
                 items: StorageLocation.defaultLocations.map((loc) {
                   return DropdownMenuItem(
@@ -293,7 +262,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                 },
               ),
             ),
-            const SizedBox(height: AppSpacing.m),
+            const SizedBox(height: AppSpacingV2.m),
 
             // Quantity and Unit
             Row(
@@ -302,23 +271,23 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                   flex: 2,
                   child: Container(
                     decoration: BoxDecoration(
-                      color: AppColors.backgroundNeu,
-                      borderRadius: BorderRadius.circular(AppSpacing.radiusL),
-                      boxShadow: AppShadows.neuDebossed,
+                      color: AppColorsV2.snowWhite,
+                      borderRadius: BorderRadius.circular(AppSpacingV2.radiusL),
+                      boxShadow: AppShadowsV2.neuDebossed,
                     ),
                     child: TextFormField(
                       controller: _quantityController,
-                      style: AppTypography.bodyMedium,
+                      style: AppTypographyV2.bodyMedium,
                       decoration: InputDecoration(
                         labelText: 'Số lượng',
-                        labelStyle: AppTypography.bodyMedium.copyWith(
-                          color: AppColors.textLight,
+                        labelStyle: AppTypographyV2.bodyMedium.copyWith(
+                          color: AppColorsV2.textLight,
                         ),
                         prefixIcon: const Text('🔢', style: TextStyle(fontSize: 20)),
                         border: InputBorder.none,
                         contentPadding: const EdgeInsets.symmetric(
-                          horizontal: AppSpacing.m,
-                          vertical: AppSpacing.m,
+                          horizontal: AppSpacingV2.m,
+                          vertical: AppSpacingV2.m,
                         ),
                       ),
                       keyboardType: TextInputType.number,
@@ -334,25 +303,25 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(width: AppSpacing.m),
+                const SizedBox(width: AppSpacingV2.m),
                 Expanded(
                   child: Container(
                     decoration: BoxDecoration(
-                      color: AppColors.backgroundNeu,
-                      borderRadius: BorderRadius.circular(AppSpacing.radiusL),
-                      boxShadow: AppShadows.neuEmbossed,
+                      color: AppColorsV2.snowWhite,
+                      borderRadius: BorderRadius.circular(AppSpacingV2.radiusL),
+                      boxShadow: AppShadowsV2.neuEmbossed,
                     ),
-                    padding: const EdgeInsets.symmetric(horizontal: AppSpacing.s),
+                    padding: const EdgeInsets.symmetric(horizontal: AppSpacingV2.s),
                     child: DropdownButtonFormField<String>(
                       value: _selectedUnit,
-                      style: AppTypography.bodyMedium,
+                      style: AppTypographyV2.bodyMedium,
                       decoration: InputDecoration(
                         labelText: 'Đơn vị',
-                        labelStyle: AppTypography.bodyMedium.copyWith(
-                          color: AppColors.textLight,
+                        labelStyle: AppTypographyV2.bodyMedium.copyWith(
+                          color: AppColorsV2.textLight,
                         ),
                         border: InputBorder.none,
-                        contentPadding: const EdgeInsets.symmetric(vertical: AppSpacing.m),
+                        contentPadding: const EdgeInsets.symmetric(vertical: AppSpacingV2.m),
                       ),
                       items: AppConstants.units.map((unit) {
                         return DropdownMenuItem(value: unit, child: Text(unit));
@@ -365,82 +334,82 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                 ),
               ],
             ),
-            const SizedBox(height: AppSpacing.m),
+            const SizedBox(height: AppSpacingV2.m),
 
             // Purchase Date
             Container(
               decoration: BoxDecoration(
-                color: AppColors.backgroundNeu,
-                borderRadius: BorderRadius.circular(AppSpacing.radiusL),
-                boxShadow: AppShadows.neuEmbossed,
+                color: AppColorsV2.snowWhite,
+                borderRadius: BorderRadius.circular(AppSpacingV2.radiusL),
+                boxShadow: AppShadowsV2.neuEmbossed,
               ),
               child: ListTile(
                 leading: const Text('🛒', style: TextStyle(fontSize: 24)),
-                title: Text('Ngày mua', style: AppTypography.bodyMedium),
+                title: Text('Ngày mua', style: AppTypographyV2.bodyMedium),
                 subtitle: Text(
                   DateFormat('dd/MM/yyyy').format(_purchaseDate),
-                  style: AppTypography.bodySmall.copyWith(color: AppColors.textLight),
+                  style: AppTypographyV2.bodySmall.copyWith(color: AppColorsV2.textLight),
                 ),
-                trailing: const Icon(Icons.calendar_today, color: AppColors.primaryPink),
+                trailing: const Icon(Icons.calendar_today, color: AppColorsV2.primaryPink),
                 onTap: () => _selectDate(context, true),
               ),
             ),
-            const SizedBox(height: AppSpacing.m),
+            const SizedBox(height: AppSpacingV2.m),
 
             // Expiry Date
             Container(
               decoration: BoxDecoration(
-                color: AppColors.backgroundNeu,
-                borderRadius: BorderRadius.circular(AppSpacing.radiusL),
-                boxShadow: AppShadows.neuEmbossed,
+                color: AppColorsV2.snowWhite,
+                borderRadius: BorderRadius.circular(AppSpacingV2.radiusL),
+                boxShadow: AppShadowsV2.neuEmbossed,
               ),
               child: ListTile(
                 leading: const Text('⏰', style: TextStyle(fontSize: 24)),
-                title: Text('Hạn sử dụng', style: AppTypography.bodyMedium),
+                title: Text('Hạn sử dụng', style: AppTypographyV2.bodyMedium),
                 subtitle: Text(
                   DateFormat('dd/MM/yyyy').format(_expiryDate),
-                  style: AppTypography.bodySmall.copyWith(color: AppColors.textLight),
+                  style: AppTypographyV2.bodySmall.copyWith(color: AppColorsV2.textLight),
                 ),
-                trailing: const Icon(Icons.calendar_today, color: AppColors.primaryPink),
+                trailing: const Icon(Icons.calendar_today, color: AppColorsV2.primaryPink),
                 onTap: () => _selectDate(context, false),
               ),
             ),
-            const SizedBox(height: AppSpacing.m),
+            const SizedBox(height: AppSpacingV2.m),
 
             // Barcode
             Container(
               decoration: BoxDecoration(
-                color: AppColors.backgroundNeu,
-                borderRadius: BorderRadius.circular(AppSpacing.radiusL),
-                boxShadow: AppShadows.neuEmbossed,
+                color: AppColorsV2.snowWhite,
+                borderRadius: BorderRadius.circular(AppSpacingV2.radiusL),
+                boxShadow: AppShadowsV2.neuEmbossed,
               ),
               child: ListTile(
                 leading: const Text('📱', style: TextStyle(fontSize: 24)),
                 title: Text(
                   _barcode ?? 'Quét mã vạch',
-                  style: AppTypography.bodyMedium,
+                  style: AppTypographyV2.bodyMedium,
                 ),
-                trailing: const Icon(Icons.qr_code_scanner, color: AppColors.primaryPink),
+                trailing: const Icon(Icons.qr_code_scanner, color: AppColorsV2.primaryPink),
                 onTap: _scanBarcode,
               ),
             ),
 
-            const SizedBox(height: AppSpacing.m),
+            const SizedBox(height: AppSpacingV2.m),
 
             // Notes
             Container(
               decoration: BoxDecoration(
-                color: AppColors.backgroundNeu,
-                borderRadius: BorderRadius.circular(AppSpacing.radiusL),
-                boxShadow: AppShadows.neuDebossed,
+                color: AppColorsV2.snowWhite,
+                borderRadius: BorderRadius.circular(AppSpacingV2.radiusL),
+                boxShadow: AppShadowsV2.neuDebossed,
               ),
               child: TextFormField(
                 controller: _notesController,
-                style: AppTypography.bodyMedium,
+                style: AppTypographyV2.bodyMedium,
                 decoration: InputDecoration(
                   labelText: 'Ghi chú',
-                  labelStyle: AppTypography.bodyMedium.copyWith(
-                    color: AppColors.textLight,
+                  labelStyle: AppTypographyV2.bodyMedium.copyWith(
+                    color: AppColorsV2.textLight,
                   ),
                   prefixIcon: const Padding(
                     padding: EdgeInsets.only(top: 12),
@@ -448,14 +417,14 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                   ),
                   border: InputBorder.none,
                   contentPadding: const EdgeInsets.symmetric(
-                    horizontal: AppSpacing.m,
-                    vertical: AppSpacing.m,
+                    horizontal: AppSpacingV2.m,
+                    vertical: AppSpacingV2.m,
                   ),
                 ),
                 maxLines: 3,
               ),
             ),
-            const SizedBox(height: AppSpacing.l),
+            const SizedBox(height: AppSpacingV2.l),
           ],
         ),
       ),
@@ -470,13 +439,13 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
           width: 200,
           height: 200,
           decoration: BoxDecoration(
-            color: AppColors.backgroundNeu,
-            borderRadius: BorderRadius.circular(AppSpacing.radiusL),
-            boxShadow: AppShadows.neuEmbossed,
+            color: AppColorsV2.snowWhite,
+            borderRadius: BorderRadius.circular(AppSpacingV2.radiusL),
+            boxShadow: AppShadowsV2.neuEmbossed,
           ),
           child: _imagePath != null && File(_imagePath!).existsSync()
               ? ClipRRect(
-                  borderRadius: BorderRadius.circular(AppSpacing.radiusL),
+                  borderRadius: BorderRadius.circular(AppSpacingV2.radiusL),
                   child: Stack(
                     fit: StackFit.expand,
                     children: [
@@ -487,10 +456,10 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                         child: Container(
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
-                              colors: AppColors.gradientUnicorn,
+                              colors: AppColorsV2.gradientPrimary,
                             ),
                             shape: BoxShape.circle,
-                            boxShadow: AppShadows.neuStrong,
+                            boxShadow: AppShadowsV2.neuStrong,
                           ),
                           child: IconButton(
                             icon: const Icon(Icons.close, color: Colors.white, size: 20),
@@ -505,21 +474,21 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      padding: const EdgeInsets.all(AppSpacing.m),
+                      padding: const EdgeInsets.all(AppSpacingV2.m),
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
-                          colors: AppColors.gradientUnicorn,
+                          colors: AppColorsV2.gradientPrimary,
                         ),
                         shape: BoxShape.circle,
-                        boxShadow: AppShadows.neuStrong,
+                        boxShadow: AppShadowsV2.neuStrong,
                       ),
                       child: const Icon(Icons.add_a_photo, size: 40, color: Colors.white),
                     ),
-                    const SizedBox(height: AppSpacing.s),
+                    const SizedBox(height: AppSpacingV2.s),
                     Text(
                       'Thêm ảnh 📸',
-                      style: AppTypography.bodyMedium.copyWith(
-                        color: AppColors.textSecondary,
+                      style: AppTypographyV2.bodyMedium.copyWith(
+                        color: AppColorsV2.textSecondary,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -536,40 +505,40 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
       backgroundColor: Colors.transparent,
       builder: (context) => Container(
         decoration: BoxDecoration(
-          color: AppColors.backgroundNeu,
+          color: AppColorsV2.snowWhite,
           borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(AppSpacing.radiusL),
-            topRight: Radius.circular(AppSpacing.radiusL),
+            topLeft: Radius.circular(AppSpacingV2.radiusL),
+            topRight: Radius.circular(AppSpacingV2.radiusL),
           ),
-          boxShadow: AppShadows.neuStrong,
+          boxShadow: AppShadowsV2.neuStrong,
         ),
         child: SafeArea(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const SizedBox(height: AppSpacing.s),
+              const SizedBox(height: AppSpacingV2.s),
               Container(
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: AppColors.textLight.withValues(alpha: 0.3),
+                  color: AppColorsV2.textLight.withValues(alpha: 0.3),
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
-              const SizedBox(height: AppSpacing.m),
+              const SizedBox(height: AppSpacingV2.m),
               ListTile(
                 leading: Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      colors: AppColors.gradientUnicorn,
+                      colors: AppColorsV2.gradientPrimary,
                     ),
                     shape: BoxShape.circle,
-                    boxShadow: AppShadows.neuSoft,
+                    boxShadow: AppShadowsV2.neuSoft,
                   ),
                   child: const Icon(Icons.camera_alt, color: Colors.white, size: 20),
                 ),
-                title: Text('Chụp ảnh 📷', style: AppTypography.bodyMedium),
+                title: Text('Chụp ảnh 📷', style: AppTypographyV2.bodyMedium),
                 onTap: () async {
                   Navigator.pop(context);
                   final image = await ImageService.instance.pickImageFromCamera();
@@ -583,14 +552,14 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      colors: AppColors.gradientUnicorn,
+                      colors: AppColorsV2.gradientPrimary,
                     ),
                     shape: BoxShape.circle,
-                    boxShadow: AppShadows.neuSoft,
+                    boxShadow: AppShadowsV2.neuSoft,
                   ),
                   child: const Icon(Icons.photo_library, color: Colors.white, size: 20),
                 ),
-                title: Text('Chọn từ thư viện 🖼️', style: AppTypography.bodyMedium),
+                title: Text('Chọn từ thư viện 🖼️', style: AppTypographyV2.bodyMedium),
                 onTap: () async {
                   Navigator.pop(context);
                   final image = await ImageService.instance.pickImageFromGallery();
@@ -599,7 +568,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                   }
                 },
               ),
-              const SizedBox(height: AppSpacing.s),
+              const SizedBox(height: AppSpacingV2.s),
             ],
           ),
         ),
