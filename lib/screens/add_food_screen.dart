@@ -175,7 +175,6 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
               controller: _nameController,
               labelText: 'Tên thực phẩm',
               hintText: 'VD: Cà chua bi',
-              emoji: '🍎',
               icon: Icons.inventory_2_rounded,
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -189,22 +188,32 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
             // Category
             Container(
               decoration: BoxDecoration(
-                color: AppColorsV2.snowWhite,
-                borderRadius: BorderRadius.circular(AppSpacingV2.radiusL),
-                boxShadow: AppShadowsV2.neuEmbossed, // Raised effect for dropdowns
+                gradient: LinearGradient(
+                  colors: [
+                    AppColorsV2.snowWhite,
+                    AppColorsV2.pearlGray.withOpacity(0.3),
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: AppSpacingV2.borderM,
+                boxShadow: AppShadowsV2.soft,
+                border: Border.all(
+                  color: AppColorsV2.doveGray.withOpacity(0.3),
+                  width: 1,
+                ),
               ),
-              padding: const EdgeInsets.symmetric(horizontal: AppSpacingV2.m),
+              padding: EdgeInsets.symmetric(horizontal: AppSpacingV2.l),
               child: DropdownButtonFormField<String>(
                 value: _selectedCategory,
-                style: AppTypographyV2.bodyMedium,
+                style: AppTypographyV2.bodyMedium(),
                 decoration: InputDecoration(
                   labelText: 'Danh mục',
-                  labelStyle: AppTypographyV2.bodyMedium.copyWith(
-                    color: AppColorsV2.textLight,
+                  labelStyle: AppTypographyV2.labelMedium(
+                    color: AppColorsV2.charcoalSoft,
                   ),
-                  prefixIcon: const Text('🏷️', style: TextStyle(fontSize: 20)),
                   border: InputBorder.none,
-                  contentPadding: const EdgeInsets.symmetric(vertical: AppSpacingV2.m),
+                  contentPadding: EdgeInsets.symmetric(vertical: AppSpacingV2.m),
                 ),
                 items: FoodCategory.defaultCategories.map((cat) {
                   return DropdownMenuItem(
@@ -228,22 +237,32 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
             // Storage Location
             Container(
               decoration: BoxDecoration(
-                color: AppColorsV2.snowWhite,
-                borderRadius: BorderRadius.circular(AppSpacingV2.radiusL),
-                boxShadow: AppShadowsV2.neuEmbossed,
+                gradient: LinearGradient(
+                  colors: [
+                    AppColorsV2.snowWhite,
+                    AppColorsV2.pearlGray.withOpacity(0.3),
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: AppSpacingV2.borderM,
+                boxShadow: AppShadowsV2.soft,
+                border: Border.all(
+                  color: AppColorsV2.doveGray.withOpacity(0.3),
+                  width: 1,
+                ),
               ),
-              padding: const EdgeInsets.symmetric(horizontal: AppSpacingV2.m),
+              padding: EdgeInsets.symmetric(horizontal: AppSpacingV2.l),
               child: DropdownButtonFormField<String>(
                 value: _selectedLocation,
-                style: AppTypographyV2.bodyMedium,
+                style: AppTypographyV2.bodyMedium(),
                 decoration: InputDecoration(
                   labelText: 'Vị trí lưu trữ',
-                  labelStyle: AppTypographyV2.bodyMedium.copyWith(
-                    color: AppColorsV2.textLight,
+                  labelStyle: AppTypographyV2.labelMedium(
+                    color: AppColorsV2.charcoalSoft,
                   ),
-                  prefixIcon: const Text('📍', style: TextStyle(fontSize: 20)),
                   border: InputBorder.none,
-                  contentPadding: const EdgeInsets.symmetric(vertical: AppSpacingV2.m),
+                  contentPadding: EdgeInsets.symmetric(vertical: AppSpacingV2.m),
                 ),
                 items: StorageLocation.defaultLocations.map((loc) {
                   return DropdownMenuItem(
@@ -271,22 +290,32 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                   flex: 2,
                   child: Container(
                     decoration: BoxDecoration(
-                      color: AppColorsV2.snowWhite,
-                      borderRadius: BorderRadius.circular(AppSpacingV2.radiusL),
-                      boxShadow: AppShadowsV2.neuDebossed,
+                      gradient: LinearGradient(
+                        colors: [
+                          AppColorsV2.snowWhite,
+                          AppColorsV2.pearlGray.withOpacity(0.3),
+                        ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      borderRadius: AppSpacingV2.borderM,
+                      boxShadow: AppShadowsV2.soft,
+                      border: Border.all(
+                        color: AppColorsV2.doveGray.withOpacity(0.3),
+                        width: 1,
+                      ),
                     ),
                     child: TextFormField(
                       controller: _quantityController,
-                      style: AppTypographyV2.bodyMedium,
+                      style: AppTypographyV2.bodyMedium(),
                       decoration: InputDecoration(
                         labelText: 'Số lượng',
-                        labelStyle: AppTypographyV2.bodyMedium.copyWith(
-                          color: AppColorsV2.textLight,
+                        labelStyle: AppTypographyV2.labelMedium(
+                          color: AppColorsV2.charcoalSoft,
                         ),
-                        prefixIcon: const Text('🔢', style: TextStyle(fontSize: 20)),
                         border: InputBorder.none,
-                        contentPadding: const EdgeInsets.symmetric(
-                          horizontal: AppSpacingV2.m,
+                        contentPadding: EdgeInsets.symmetric(
+                          horizontal: AppSpacingV2.l,
                           vertical: AppSpacingV2.m,
                         ),
                       ),
@@ -307,21 +336,32 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                 Expanded(
                   child: Container(
                     decoration: BoxDecoration(
-                      color: AppColorsV2.snowWhite,
-                      borderRadius: BorderRadius.circular(AppSpacingV2.radiusL),
-                      boxShadow: AppShadowsV2.neuEmbossed,
+                      gradient: LinearGradient(
+                        colors: [
+                          AppColorsV2.snowWhite,
+                          AppColorsV2.pearlGray.withOpacity(0.3),
+                        ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      borderRadius: AppSpacingV2.borderM,
+                      boxShadow: AppShadowsV2.soft,
+                      border: Border.all(
+                        color: AppColorsV2.doveGray.withOpacity(0.3),
+                        width: 1,
+                      ),
                     ),
-                    padding: const EdgeInsets.symmetric(horizontal: AppSpacingV2.s),
+                    padding: EdgeInsets.symmetric(horizontal: AppSpacingV2.l),
                     child: DropdownButtonFormField<String>(
                       value: _selectedUnit,
-                      style: AppTypographyV2.bodyMedium,
+                      style: AppTypographyV2.bodyMedium(),
                       decoration: InputDecoration(
                         labelText: 'Đơn vị',
-                        labelStyle: AppTypographyV2.bodyMedium.copyWith(
-                          color: AppColorsV2.textLight,
+                        labelStyle: AppTypographyV2.labelMedium(
+                          color: AppColorsV2.charcoalSoft,
                         ),
                         border: InputBorder.none,
-                        contentPadding: const EdgeInsets.symmetric(vertical: AppSpacingV2.m),
+                        contentPadding: EdgeInsets.symmetric(vertical: AppSpacingV2.m),
                       ),
                       items: AppConstants.units.map((unit) {
                         return DropdownMenuItem(value: unit, child: Text(unit));
@@ -339,18 +379,28 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
             // Purchase Date
             Container(
               decoration: BoxDecoration(
-                color: AppColorsV2.snowWhite,
-                borderRadius: BorderRadius.circular(AppSpacingV2.radiusL),
-                boxShadow: AppShadowsV2.neuEmbossed,
+                gradient: LinearGradient(
+                  colors: [
+                    AppColorsV2.snowWhite,
+                    AppColorsV2.pearlGray.withOpacity(0.3),
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: AppSpacingV2.borderM,
+                boxShadow: AppShadowsV2.soft,
+                border: Border.all(
+                  color: AppColorsV2.doveGray.withOpacity(0.3),
+                  width: 1,
+                ),
               ),
               child: ListTile(
-                leading: const Text('🛒', style: TextStyle(fontSize: 24)),
-                title: Text('Ngày mua', style: AppTypographyV2.bodyMedium),
+                title: Text('Ngày mua', style: AppTypographyV2.labelMedium(color: AppColorsV2.charcoalSoft)),
                 subtitle: Text(
                   DateFormat('dd/MM/yyyy').format(_purchaseDate),
-                  style: AppTypographyV2.bodySmall.copyWith(color: AppColorsV2.textLight),
+                  style: AppTypographyV2.bodyMedium(),
                 ),
-                trailing: const Icon(Icons.calendar_today, color: AppColorsV2.primaryPink),
+                trailing: Icon(Icons.calendar_today_rounded, color: AppColorsV2.roseQuartz),
                 onTap: () => _selectDate(context, true),
               ),
             ),
@@ -359,18 +409,28 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
             // Expiry Date
             Container(
               decoration: BoxDecoration(
-                color: AppColorsV2.snowWhite,
-                borderRadius: BorderRadius.circular(AppSpacingV2.radiusL),
-                boxShadow: AppShadowsV2.neuEmbossed,
+                gradient: LinearGradient(
+                  colors: [
+                    AppColorsV2.snowWhite,
+                    AppColorsV2.pearlGray.withOpacity(0.3),
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: AppSpacingV2.borderM,
+                boxShadow: AppShadowsV2.soft,
+                border: Border.all(
+                  color: AppColorsV2.doveGray.withOpacity(0.3),
+                  width: 1,
+                ),
               ),
               child: ListTile(
-                leading: const Text('⏰', style: TextStyle(fontSize: 24)),
-                title: Text('Hạn sử dụng', style: AppTypographyV2.bodyMedium),
+                title: Text('Hạn sử dụng', style: AppTypographyV2.labelMedium(color: AppColorsV2.charcoalSoft)),
                 subtitle: Text(
                   DateFormat('dd/MM/yyyy').format(_expiryDate),
-                  style: AppTypographyV2.bodySmall.copyWith(color: AppColorsV2.textLight),
+                  style: AppTypographyV2.bodyMedium(),
                 ),
-                trailing: const Icon(Icons.calendar_today, color: AppColorsV2.primaryPink),
+                trailing: Icon(Icons.calendar_today_rounded, color: AppColorsV2.roseQuartz),
                 onTap: () => _selectDate(context, false),
               ),
             ),
