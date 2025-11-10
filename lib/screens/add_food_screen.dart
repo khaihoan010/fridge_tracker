@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:path_provider/path_provider.dart';
@@ -17,7 +16,6 @@ import '../utils/app_colors_v2.dart';
 import '../utils/app_typography_v2.dart';
 import '../utils/app_spacing_v2.dart';
 import '../utils/app_shadows_v2.dart';
-import '../widgets/cute/cute_button_v2.dart';
 import '../widgets/cute/cute_input_field_v2.dart';
 
 class AddFoodScreen extends StatefulWidget {
@@ -82,7 +80,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
         leading: Container(
           margin: EdgeInsets.all(AppSpacingV2.s),
           decoration: BoxDecoration(
-            color: AppColorsV2.pearlGray.withOpacity(0.5),
+            color: AppColorsV2.pearlGray.withValues(alpha: 0.5),
             shape: BoxShape.circle,
             boxShadow: AppShadowsV2.subtle,
           ),
@@ -147,19 +145,17 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                         'Lưu',
                         style: AppTypographyV2.labelMedium(
                           color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ],
+                        ).copyWith(
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
-                    ),
+                    ],
                   ),
                 ),
               ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
       body: Form(
         key: _formKey,
@@ -191,7 +187,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                 gradient: LinearGradient(
                   colors: [
                     AppColorsV2.snowWhite,
-                    AppColorsV2.pearlGray.withOpacity(0.3),
+                    AppColorsV2.pearlGray.withValues(alpha: 0.3),
                   ],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
@@ -199,7 +195,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                 borderRadius: AppSpacingV2.borderM,
                 boxShadow: AppShadowsV2.soft,
                 border: Border.all(
-                  color: AppColorsV2.doveGray.withOpacity(0.3),
+                  color: AppColorsV2.doveGray.withValues(alpha: 0.3),
                   width: 1,
                 ),
               ),
@@ -240,7 +236,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                 gradient: LinearGradient(
                   colors: [
                     AppColorsV2.snowWhite,
-                    AppColorsV2.pearlGray.withOpacity(0.3),
+                    AppColorsV2.pearlGray.withValues(alpha: 0.3),
                   ],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
@@ -248,7 +244,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                 borderRadius: AppSpacingV2.borderM,
                 boxShadow: AppShadowsV2.soft,
                 border: Border.all(
-                  color: AppColorsV2.doveGray.withOpacity(0.3),
+                  color: AppColorsV2.doveGray.withValues(alpha: 0.3),
                   width: 1,
                 ),
               ),
@@ -293,7 +289,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                       gradient: LinearGradient(
                         colors: [
                           AppColorsV2.snowWhite,
-                          AppColorsV2.pearlGray.withOpacity(0.3),
+                          AppColorsV2.pearlGray.withValues(alpha: 0.3),
                         ],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
@@ -301,7 +297,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                       borderRadius: AppSpacingV2.borderM,
                       boxShadow: AppShadowsV2.soft,
                       border: Border.all(
-                        color: AppColorsV2.doveGray.withOpacity(0.3),
+                        color: AppColorsV2.doveGray.withValues(alpha: 0.3),
                         width: 1,
                       ),
                     ),
@@ -339,7 +335,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                       gradient: LinearGradient(
                         colors: [
                           AppColorsV2.snowWhite,
-                          AppColorsV2.pearlGray.withOpacity(0.3),
+                          AppColorsV2.pearlGray.withValues(alpha: 0.3),
                         ],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
@@ -347,7 +343,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                       borderRadius: AppSpacingV2.borderM,
                       boxShadow: AppShadowsV2.soft,
                       border: Border.all(
-                        color: AppColorsV2.doveGray.withOpacity(0.3),
+                        color: AppColorsV2.doveGray.withValues(alpha: 0.3),
                         width: 1,
                       ),
                     ),
@@ -382,7 +378,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                 gradient: LinearGradient(
                   colors: [
                     AppColorsV2.snowWhite,
-                    AppColorsV2.pearlGray.withOpacity(0.3),
+                    AppColorsV2.pearlGray.withValues(alpha: 0.3),
                   ],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
@@ -390,7 +386,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                 borderRadius: AppSpacingV2.borderM,
                 boxShadow: AppShadowsV2.soft,
                 border: Border.all(
-                  color: AppColorsV2.doveGray.withOpacity(0.3),
+                  color: AppColorsV2.doveGray.withValues(alpha: 0.3),
                   width: 1,
                 ),
               ),
@@ -412,7 +408,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                 gradient: LinearGradient(
                   colors: [
                     AppColorsV2.snowWhite,
-                    AppColorsV2.pearlGray.withOpacity(0.3),
+                    AppColorsV2.pearlGray.withValues(alpha: 0.3),
                   ],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
@@ -420,7 +416,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                 borderRadius: AppSpacingV2.borderM,
                 boxShadow: AppShadowsV2.soft,
                 border: Border.all(
-                  color: AppColorsV2.doveGray.withOpacity(0.3),
+                  color: AppColorsV2.doveGray.withValues(alpha: 0.3),
                   width: 1,
                 ),
               ),
@@ -442,7 +438,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                 gradient: LinearGradient(
                   colors: [
                     AppColorsV2.snowWhite,
-                    AppColorsV2.pearlGray.withOpacity(0.3),
+                    AppColorsV2.pearlGray.withValues(alpha: 0.3),
                   ],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
@@ -450,7 +446,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                 borderRadius: AppSpacingV2.borderM,
                 boxShadow: AppShadowsV2.soft,
                 border: Border.all(
-                  color: AppColorsV2.doveGray.withOpacity(0.3),
+                  color: AppColorsV2.doveGray.withValues(alpha: 0.3),
                   width: 1,
                 ),
               ),
@@ -476,7 +472,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                 gradient: LinearGradient(
                   colors: [
                     AppColorsV2.snowWhite,
-                    AppColorsV2.pearlGray.withOpacity(0.3),
+                    AppColorsV2.pearlGray.withValues(alpha: 0.3),
                   ],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
@@ -484,7 +480,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                 borderRadius: AppSpacingV2.borderM,
                 boxShadow: AppShadowsV2.soft,
                 border: Border.all(
-                  color: AppColorsV2.doveGray.withOpacity(0.3),
+                  color: AppColorsV2.doveGray.withValues(alpha: 0.3),
                   width: 1,
                 ),
               ),
@@ -523,7 +519,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
             gradient: LinearGradient(
               colors: [
                 AppColorsV2.snowWhite,
-                AppColorsV2.pearlGray.withOpacity(0.3),
+                AppColorsV2.pearlGray.withValues(alpha: 0.3),
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -531,7 +527,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
             borderRadius: AppSpacingV2.borderM,
             boxShadow: AppShadowsV2.soft,
             border: Border.all(
-              color: AppColorsV2.doveGray.withOpacity(0.3),
+              color: AppColorsV2.doveGray.withValues(alpha: 0.3),
               width: 1,
             ),
           ),
@@ -551,7 +547,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                               colors: AppColorsV2.gradientPrimary,
                             ),
                             shape: BoxShape.circle,
-                            boxShadow: AppShadowsV2.neuStrong,
+                            boxShadow: AppShadowsV2.strong,
                           ),
                           child: IconButton(
                             icon: const Icon(Icons.close, color: Colors.white, size: 20),
@@ -572,7 +568,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                           colors: AppColorsV2.gradientPrimary,
                         ),
                         shape: BoxShape.circle,
-                        boxShadow: AppShadowsV2.neuStrong,
+                        boxShadow: AppShadowsV2.strong,
                       ),
                       child: const Icon(Icons.add_a_photo, size: 40, color: Colors.white),
                     ),
@@ -580,7 +576,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                     Text(
                       'Thêm ảnh',
                       style: AppTypographyV2.bodyMedium().copyWith(
-                        color: AppColorsV2.textSecondary,
+                        color: AppColorsV2.charcoalSoft,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -602,7 +598,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
             topLeft: Radius.circular(AppSpacingV2.radiusL),
             topRight: Radius.circular(AppSpacingV2.radiusL),
           ),
-          boxShadow: AppShadowsV2.neuStrong,
+          boxShadow: AppShadowsV2.strong,
         ),
         child: SafeArea(
           child: Column(
@@ -613,7 +609,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: AppColorsV2.textLight.withValues(alpha: 0.3),
+                  color: AppColorsV2.slateMuted.withValues(alpha: 0.3),
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
@@ -626,7 +622,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                       colors: AppColorsV2.gradientPrimary,
                     ),
                     shape: BoxShape.circle,
-                    boxShadow: AppShadowsV2.neuSoft,
+                    boxShadow: AppShadowsV2.subtle,
                   ),
                   child: const Icon(Icons.camera_alt, color: Colors.white, size: 20),
                 ),
@@ -647,7 +643,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                       colors: AppColorsV2.gradientPrimary,
                     ),
                     shape: BoxShape.circle,
-                    boxShadow: AppShadowsV2.neuSoft,
+                    boxShadow: AppShadowsV2.subtle,
                   ),
                   child: const Icon(Icons.photo_library, color: Colors.white, size: 20),
                 ),
