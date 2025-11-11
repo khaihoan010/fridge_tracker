@@ -634,6 +634,53 @@ class DatabaseHelper {
     return categoryCount;
   }
 
+  // === NUTRITION FACTS OPERATIONS ===
+
+  // INSERT - Add nutrition facts for a food item
+  Future<int> insertNutritionFacts(Map<String, dynamic> nutritionData) async {
+    final db = await database;
+    return await db.insert(
+      AppConstants.tableNutritionFacts,
+      nutritionData,
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
+  // READ - Get nutrition facts for a food item
+  Future<Map<String, dynamic>?> getNutritionFacts(int foodId) async {
+    final db = await database;
+    final maps = await db.query(
+      AppConstants.tableNutritionFacts,
+      where: 'food_id = ?',
+      whereArgs: [foodId],
+      limit: 1,
+    );
+
+    if (maps.isEmpty) return null;
+    return maps.first;
+  }
+
+  // UPDATE - Update nutrition facts
+  Future<int> updateNutritionFacts(int foodId, Map<String, dynamic> nutritionData) async {
+    final db = await database;
+    return await db.update(
+      AppConstants.tableNutritionFacts,
+      nutritionData,
+      where: 'food_id = ?',
+      whereArgs: [foodId],
+    );
+  }
+
+  // DELETE - Delete nutrition facts for a food item
+  Future<int> deleteNutritionFacts(int foodId) async {
+    final db = await database;
+    return await db.delete(
+      AppConstants.tableNutritionFacts,
+      where: 'food_id = ?',
+      whereArgs: [foodId],
+    );
+  }
+
   // Đóng database
   Future<void> close() async {
     final db = await database;

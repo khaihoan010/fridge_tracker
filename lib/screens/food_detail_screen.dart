@@ -3,20 +3,59 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/food_item.dart';
 import '../models/category.dart';
+import '../models/nutrition_facts.dart';
 import '../providers/food_provider.dart';
+import '../database/database_helper.dart';
 import '../utils/date_utils.dart';
 import '../widgets/expiry_badge.dart';
+import '../widgets/nutrition_facts_card.dart';
 import 'add_food_screen.dart';
 
-class FoodDetailScreen extends StatelessWidget {
+class FoodDetailScreen extends StatefulWidget {
   final FoodItem food;
 
   const FoodDetailScreen({super.key, required this.food});
 
   @override
+  State<FoodDetailScreen> createState() => _FoodDetailScreenState();
+}
+
+class _FoodDetailScreenState extends State<FoodDetailScreen> {
+  NutritionFacts? _nutritionFacts;
+  bool _isLoadingNutrition = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadNutritionData();
+  }
+
+  Future<void> _loadNutritionData() async {
+    if (widget.food.id != null) {
+      try {
+        final nutritionData = await DatabaseHelper.instance.getNutritionFacts(widget.food.id!);
+        if (nutritionData != null && mounted) {
+          setState(() {
+            _nutritionFacts = NutritionFacts.fromMap(nutritionData);
+            _isLoadingNutrition = false;
+          });
+        } else if (mounted) {
+          setState(() => _isLoadingNutrition = false);
+        }
+      } catch (e) {
+        if (mounted) {
+          setState(() => _isLoadingNutrition = false);
+        }
+      }
+    } else {
+      setState(() => _isLoadingNutrition = false);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final category = FoodCategory.getById(food.category);
-    final location = StorageLocation.getById(food.storageLocation);
+    final category = FoodCategory.getById(widget.food.category);
+    final location = StorageLocation.getById(widget.food.storageLocation);
 
     return Scaffold(
       appBar: AppBar(
@@ -28,7 +67,7 @@ class FoodDetailScreen extends StatelessWidget {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => AddFoodScreen(food: food),
+                  builder: (_) => AddFoodScreen(food: widget.food),
                 ),
               );
             },
@@ -42,9 +81,9 @@ class FoodDetailScreen extends StatelessWidget {
       body: ListView(
         children: [
           // Image
-          if (food.imagePath != null && File(food.imagePath!).existsSync())
+          if (widget.food.imagePath != null && File(widget.food.imagePath!).existsSync())
             Image.file(
-              File(food.imagePath!),
+              File(widget.food.imagePath!),
               height: 300,
               width: double.infinity,
               fit: BoxFit.cover,
@@ -67,7 +106,7 @@ class FoodDetailScreen extends StatelessWidget {
               children: [
                 // Name
                 Text(
-                  food.name,
+                  widget.food.name,
                   style: const TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
@@ -76,7 +115,7 @@ class FoodDetailScreen extends StatelessWidget {
                 const SizedBox(height: 16),
 
                 // Expiry Badge
-                LargeExpiryBadge(food: food),
+                LargeExpiryBadge(food: widget.food),
                 const SizedBox(height: 24),
 
                 // Details
@@ -98,34 +137,34 @@ class FoodDetailScreen extends StatelessWidget {
                 _buildDetailRow(
                   Icons.shopping_cart,
                   'Số lượng',
-                  '${food.quantity} ${food.unit}',
+                  '${widget.food.quantity} ${widget.food.unit}',
                 ),
                 const Divider(),
 
                 _buildDetailRow(
                   Icons.shopping_bag,
                   'Ngày mua',
-                  AppDateUtils.formatDate(food.purchaseDate),
+                  AppDateUtils.formatDate(widget.food.purchaseDate),
                 ),
                 const Divider(),
 
                 _buildDetailRow(
                   Icons.event_busy,
                   'Hạn sử dụng',
-                  AppDateUtils.formatDate(food.expiryDate),
+                  AppDateUtils.formatDate(widget.food.expiryDate),
                 ),
                 const Divider(),
 
-                if (food.barcode != null) ...[
+                if (widget.food.barcode != null) ...[
                   _buildDetailRow(
                     Icons.qr_code,
                     'Mã vạch',
-                    food.barcode!,
+                    widget.food.barcode!,
                   ),
                   const Divider(),
                 ],
 
-                if (food.notes != null && food.notes!.isNotEmpty) ...[
+                if (widget.food.notes != null && widget.food.notes!.isNotEmpty) ...[
                   const SizedBox(height: 16),
                   const Text(
                     'Ghi chú',
@@ -136,8 +175,32 @@ class FoodDetailScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    food.notes!,
+                    widget.food.notes!,
                     style: const TextStyle(fontSize: 14),
+                  ),
+                ],
+
+                // Nutrition Facts Section
+                const SizedBox(height: 24),
+                if (_isLoadingNutrition)
+                  const Center(
+                    child: Padding(
+                      padding: EdgeInsets.all(16.0),
+                      child: CircularProgressIndicator(),
+                    ),
+                  )
+                else if (_nutritionFacts != null) ...[
+                  const Text(
+                    'Thông tin dinh dưỡng',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  NutritionFactsCard(
+                    nutritionFacts: _nutritionFacts!,
+                    isCompact: false,
                   ),
                 ],
               ],
@@ -192,7 +255,7 @@ class FoodDetailScreen extends StatelessWidget {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Xác nhận xóa'),
-        content: Text('Bạn có chắc muốn xóa "${food.name}"?'),
+        content: Text('Bạn có chắc muốn xóa "${widget.food.name}"?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
@@ -200,7 +263,7 @@ class FoodDetailScreen extends StatelessWidget {
           ),
           TextButton(
             onPressed: () async {
-              await context.read<FoodProvider>().deleteFood(food);
+              await context.read<FoodProvider>().deleteFood(widget.food);
               if (context.mounted) {
                 Navigator.pop(context); // Close dialog
                 Navigator.pop(context); // Close detail screen
