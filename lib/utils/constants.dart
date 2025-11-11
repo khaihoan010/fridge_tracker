@@ -7,8 +7,13 @@ class AppConstants {
 
   // Database
   static const String databaseName = 'fridge_tracker.db';
-  static const int databaseVersion = 1;
+  static const int databaseVersion = 2; // Updated for nutrition features
   static const String tableFoods = 'foods';
+  static const String tableNutritionFacts = 'nutrition_facts';
+  static const String tableVitaminInfo = 'vitamin_info';
+  static const String tableMineralInfo = 'mineral_info';
+  static const String tableDailyNutrition = 'daily_nutrition';
+  static const String tableUserProfile = 'user_profile';
 
   // Notification
   static const String notificationChannelId = 'expiry_notifications';
