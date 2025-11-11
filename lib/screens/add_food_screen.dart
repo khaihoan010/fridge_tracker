@@ -744,7 +744,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
             else if (_nutritionFacts != null) ...[
               // Nutrition Facts Card
               NutritionFactsCard(
-                nutritionFacts: _nutritionFacts!,
+                nutrition: _nutritionFacts!,
                 isCompact: true,
               ),
               const SizedBox(height: AppSpacingV2.m),
@@ -984,7 +984,12 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
       // Use English name for better USDA search results
       final searchQuery = foodTemplate.nameEn ?? foodTemplate.name;
 
-      final nutrition = await USDAApiService.instance.searchAndGetNutrition(searchQuery);
+      // Use foodId = 0 temporarily for preview (will be updated when saving)
+      final tempFoodId = widget.food?.id ?? 0;
+      final nutrition = await USDAApiService.instance.searchAndGetNutrition(
+        searchQuery,
+        foodId: tempFoodId,
+      );
 
       if (nutrition != null && mounted) {
         setState(() {
