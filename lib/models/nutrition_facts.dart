@@ -183,17 +183,22 @@ class NutritionFacts {
         for (var term in searchTerms) {
           final nutrient = nutrients.firstWhere(
             (n) {
-              final name = (n['nutrient']?['name'] as String? ?? '').toLowerCase();
+              // USDA API structure: nutrientName (not nutrient.name)
+              final name = (n['nutrientName'] as String? ??
+                          n['nutrient']?['name'] as String? ?? '').toLowerCase();
               return name.contains(term.toLowerCase());
             },
             orElse: () => null,
           );
           if (nutrient != null) {
-            return (nutrient['amount'] as num?)?.toDouble() ?? 0.0;
+            // USDA API structure: value (not amount)
+            return (nutrient['value'] as num? ??
+                   nutrient['amount'] as num?)?.toDouble() ?? 0.0;
           }
         }
         return 0.0;
       } catch (e) {
+        print('Error getting nutrient for $searchTerms: $e');
         return 0.0;
       }
     }
