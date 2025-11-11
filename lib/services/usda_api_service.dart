@@ -13,8 +13,8 @@ import '../models/nutrition_facts.dart';
 class USDAApiService {
   static const String _baseUrl = 'https://api.nal.usda.gov/fdc/v1';
 
-  // TODO: Replace with your actual API key from https://fdc.nal.usda.gov/api-key-signup.html
-  static const String _apiKey = 'DEMO_KEY'; // TEMPORARY - Replace with real key!
+  // USDA FoodData Central API Key (FREE, unlimited requests)
+  static const String _apiKey = 'dI4H0IMZ4pZr5KJm31hgC3pF0Z0l86jRwPDHwCvN';
 
   static final USDAApiService instance = USDAApiService._init();
   USDAApiService._init();
