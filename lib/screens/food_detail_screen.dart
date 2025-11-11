@@ -199,7 +199,7 @@ class _FoodDetailScreenState extends State<FoodDetailScreen> {
                   ),
                   const SizedBox(height: 12),
                   NutritionFactsCard(
-                    nutritionFacts: _nutritionFacts!,
+                    nutrition: _nutritionFacts!,
                     isCompact: false,
                   ),
                 ],
