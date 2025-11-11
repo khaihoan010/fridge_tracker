@@ -8,17 +8,21 @@ import '../models/food_item.dart';
 import '../models/category.dart';
 import '../models/product_info.dart';
 import '../models/food_template.dart';
+import '../models/nutrition_facts.dart';
 import '../providers/food_provider.dart';
 import '../providers/settings_provider.dart';
 import '../services/barcode_service.dart';
 import '../services/image_service.dart';
 import '../services/food_database_service.dart';
+import '../services/usda_api_service.dart';
+import '../database/database_helper.dart';
 import '../utils/constants.dart';
 import '../utils/app_colors_v2.dart';
 import '../utils/app_typography_v2.dart';
 import '../utils/app_spacing_v2.dart';
 import '../utils/app_shadows_v2.dart';
 import '../widgets/cute/cute_input_field_v2.dart';
+import '../widgets/nutrition_facts_card.dart';
 
 class AddFoodScreen extends StatefulWidget {
   final FoodItem? food;
@@ -46,6 +50,9 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
   bool _isEditing = false;
   FoodTemplate? _selectedFoodTemplate; // Track selected food template
   bool _autoCalculatedExpiry = false; // Track if expiry was auto-calculated
+  List<FoodTemplate> _currentSuggestions = []; // Track current autocomplete suggestions
+  NutritionFacts? _nutritionFacts; // Store nutrition data
+  bool _isFetchingNutrition = false; // Track if fetching nutrition data
 
   @override
   void initState() {
@@ -153,11 +160,15 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
             Autocomplete<FoodTemplate>(
               optionsBuilder: (TextEditingValue textEditingValue) async {
                 if (textEditingValue.text.isEmpty || textEditingValue.text.length < 2) {
+                  setState(() => _currentSuggestions = []);
                   return const Iterable<FoodTemplate>.empty();
                 }
                 try {
-                  return await FoodDatabaseService.instance.searchFood(textEditingValue.text);
+                  final suggestions = await FoodDatabaseService.instance.searchFood(textEditingValue.text);
+                  setState(() => _currentSuggestions = suggestions);
+                  return suggestions;
                 } catch (e) {
+                  setState(() => _currentSuggestions = []);
                   return const Iterable<FoodTemplate>.empty();
                 }
               },
@@ -206,7 +217,21 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                       child: TextFormField(
                         controller: controller,
                         focusNode: focusNode,
-                        onEditingComplete: onEditingComplete,
+                        onEditingComplete: () {
+                          // Auto-select first suggestion when Enter is pressed
+                          if (_currentSuggestions.isNotEmpty) {
+                            _onFoodTemplateSelected(_currentSuggestions.first);
+                            focusNode.unfocus(); // Close keyboard
+                          } else {
+                            onEditingComplete();
+                          }
+                        },
+                        onFieldSubmitted: (value) {
+                          // Also handle when user submits field
+                          if (_currentSuggestions.isNotEmpty) {
+                            _onFoodTemplateSelected(_currentSuggestions.first);
+                          }
+                        },
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Vui lòng nhập tên thực phẩm';
@@ -674,6 +699,56 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
               ),
             ),
             const SizedBox(height: AppSpacingV2.l),
+
+            // Nutrition Facts Section
+            if (_isFetchingNutrition)
+              Container(
+                padding: EdgeInsets.all(AppSpacingV2.l),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      AppColorsV2.snowWhite,
+                      AppColorsV2.pearlGray.withValues(alpha: 0.3),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  borderRadius: AppSpacingV2.borderM,
+                  boxShadow: AppShadowsV2.soft,
+                  border: Border.all(
+                    color: AppColorsV2.doveGray.withValues(alpha: 0.3),
+                    width: 1,
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 20,
+                      height: 20,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        valueColor: AlwaysStoppedAnimation<Color>(AppColorsV2.roseQuartz),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Text(
+                      'Đang tải thông tin dinh dưỡng...',
+                      style: AppTypographyV2.bodyMedium().copyWith(
+                        color: AppColorsV2.slateMuted,
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            else if (_nutritionFacts != null) ...[
+              // Nutrition Facts Card
+              NutritionFactsCard(
+                nutritionFacts: _nutritionFacts!,
+                isCompact: true,
+              ),
+              const SizedBox(height: AppSpacingV2.m),
+            ],
           ],
         ),
       ),
@@ -896,6 +971,76 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
         ),
       );
     }
+
+    // Fetch nutrition data from USDA API
+    _fetchNutritionData(foodTemplate);
+  }
+
+  /// Fetch nutrition data from USDA API
+  Future<void> _fetchNutritionData(FoodTemplate foodTemplate) async {
+    setState(() => _isFetchingNutrition = true);
+
+    try {
+      // Use English name for better USDA search results
+      final searchQuery = foodTemplate.nameEn ?? foodTemplate.name;
+
+      final nutrition = await USDAApiService.instance.searchAndGetNutrition(searchQuery);
+
+      if (nutrition != null && mounted) {
+        setState(() {
+          _nutritionFacts = nutrition;
+          _isFetchingNutrition = false;
+        });
+
+        // Show success message
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Row(
+              children: [
+                Icon(Icons.check_circle_outline, color: Colors.white),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    '✅ Đã tải thông tin dinh dưỡng',
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                ),
+              ],
+            ),
+            backgroundColor: Colors.green,
+            duration: const Duration(seconds: 2),
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+      } else if (mounted) {
+        setState(() => _isFetchingNutrition = false);
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() => _isFetchingNutrition = false);
+
+        // Show info message (not error, as nutrition is optional)
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Row(
+              children: [
+                Icon(Icons.info_outline, color: Colors.white),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    'Không tìm thấy thông tin dinh dưỡng',
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                ),
+              ],
+            ),
+            backgroundColor: Colors.orange,
+            duration: const Duration(seconds: 2),
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+      }
+    }
   }
 
   Future<void> _selectDate(BuildContext context, bool isPurchaseDate) async {
@@ -1060,10 +1205,35 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
     final foodProvider = context.read<FoodProvider>();
 
     bool success;
+    int? foodId;
+
     if (_isEditing) {
       success = await foodProvider.updateFood(food, settings.notifyDaysBefore);
+      foodId = food.id;
     } else {
       success = await foodProvider.addFood(food, settings.notifyDaysBefore);
+      // Get the newly inserted food ID
+      if (success) {
+        final foods = await DatabaseHelper.instance.getAllFoods();
+        foodId = foods.isNotEmpty ? foods.last.id : null;
+      }
+    }
+
+    // Save nutrition facts if available
+    if (success && foodId != null && _nutritionFacts != null) {
+      try {
+        final nutritionData = _nutritionFacts!.toMap();
+        nutritionData['food_id'] = foodId;
+
+        if (_isEditing) {
+          await DatabaseHelper.instance.updateNutritionFacts(foodId, nutritionData);
+        } else {
+          await DatabaseHelper.instance.insertNutritionFacts(nutritionData);
+        }
+      } catch (e) {
+        print('Error saving nutrition facts: $e');
+        // Don't fail the whole save operation if nutrition save fails
+      }
     }
 
     if (success && mounted) {
